@@ -1,0 +1,28 @@
+{
+  "App": {
+    "name": "Galmee Jumlaa",
+    "shortName": "Galmee",
+    "tagline": "Galmeen kee namoonni liqii akka qaban sitti hima. Kun eenyu, hammam fi eegasii akka ta'e sirritti agarsiisa."
+  },
+  "Home": {
+    "today": "Har'a",
+    "getStarted": "Jalqabi",
+    "logIn": "Seeni",
+    "features": {
+      "owed": "Warra liqii qaban, akka hamma isaaniitti",
+      "statement": "Liqii fi kaffaltii hunda, haftee waliin",
+      "overdue": "Liqii yeroon darbe: guyyaa 0–30, 31–60 fi 60+",
+      "offline": "Interneetii malee hojjeta, booda walsimsiisa"
+    }
+  },
+  "Language": {
+    "label": "Afaan",
+    "am": "አማርኛ",
+    "om": "Afaan Oromoo",
+    "en": "English"
+  },
+  "Offline": {
+    "title": "Interneetii hin qabdu",
+    "body": "Galmeen ofumaan deebi'ee walqunnama. Gurgurtaan ati galmeessitu bilbila kana irratti olkaa'amee yeroo interneetiin deebi'u walsimsiifama."
+  }
+}

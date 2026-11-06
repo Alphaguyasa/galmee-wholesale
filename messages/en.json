@@ -1,0 +1,28 @@
+{
+  "App": {
+    "name": "Galmee Wholesale",
+    "shortName": "Galmee",
+    "tagline": "Your notebook says people owe you money. This shows exactly who, how much, and since when."
+  },
+  "Home": {
+    "today": "Today",
+    "getStarted": "Get started",
+    "logIn": "Log in",
+    "features": {
+      "owed": "Who owes you, sorted by amount",
+      "statement": "Every debt and repayment, with a running balance",
+      "overdue": "Overdue list: 0–30, 31–60 and 60+ days",
+      "offline": "Works without internet and syncs later"
+    }
+  },
+  "Language": {
+    "label": "Language",
+    "am": "አማርኛ",
+    "om": "Afaan Oromoo",
+    "en": "English"
+  },
+  "Offline": {
+    "title": "You are offline",
+    "body": "Galmee will reconnect automatically. Sales you record are saved on this phone and sync when the internet is back."
+  }
+}

@@ -22,6 +22,8 @@ Newest entries first.
 
 **Next:** `docs/DESIGN.md` + theme tokens/fonts (Q items, before more screens), then the `server-only` DAL + zod and auth (sign up / log in / log out, `create_tenant` with vertical `wholesale`), security headers/CSP, then the app shell.
 
+**Note on commit messages:** Alpha's "no AI attribution" rule (CLAUDE.md, Commits) landed on main while this run was already committing, so the 7 commits from 25807b5..6e3b87c (plus e9fd593) still carry `Co-Authored-By`/`Claude-Session` lines. Removing them would mean rewriting pushed history, which CLAUDE.md forbids, so they stay; all commits from now on follow the rule.
+
 **Blockers:** none. Questions for Alpha in NEEDS_APPROVAL.md (text review, Oromo month names, optional network allowlist).
 
 ## 2026-11-06

@@ -63,6 +63,6 @@
 - [ ] `server-only` Data Access Layer in `src/server/dal/`; every Server Action validates with zod and re-checks auth + role
 - [ ] Security headers and CSP with nonce (SECURITY.md section 5)
 - [ ] Cross-tenant RLS test extended to this product's tables and passing
-- [ ] Playwright screenshot script for 360 px and 1280 px (`webapp-testing` skill)
-- [ ] `npm audit` clean, Dependabot active
+- [x] Playwright screenshot script for 360 px and 1280 px (`webapp-testing` skill)
+- [x] `npm audit` clean, Dependabot active
 - [ ] Self-audit (SECURITY.md section 9) recorded in DAILY_LOG.md

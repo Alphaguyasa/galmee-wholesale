@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="am">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#1f7a4d" />
+    <title>Galmee · Offline</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: "Noto Sans Ethiopic", "Noto Sans", system-ui, sans-serif;
+        background: #fff;
+        color: #1a1a1a;
+      }
+      main {
+        max-width: 28rem;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+      }
+      img { width: 64px; height: 64px; border-radius: 14px; }
+      section { border: 1px solid #e5e5e5; border-radius: 12px; padding: 1rem; }
+      h1 { font-size: 1.15rem; margin: 0 0 0.4rem; }
+      p { margin: 0; color: #555; line-height: 1.5; }
+      button {
+        height: 48px; border: 0; border-radius: 8px;
+        background: #1f7a4d; color: #fff; font-size: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <img src="/icons/icon-192.png" alt="" />
+      <section lang="am">
+        <h1>ከኢንተርኔት ተቋርጠዋል</h1>
+        <p>ገልሜ በራሱ እንደገና ይገናኛል። የሚመዘግቧቸው ሽያጮች በዚህ ስልክ ተቀምጠው ኢንተርኔት ሲመለስ ይመሳሰላሉ።</p>
+      </section>
+      <section lang="om">
+        <h1>Interneetii hin qabdu</h1>
+        <p>Galmeen ofumaan deebi'ee walqunnama. Gurgurtaan ati galmeessitu bilbila kana irratti olkaa'amee yeroo interneetiin deebi'u walsimsiifama.</p>
+      </section>
+      <section lang="en">
+        <h1>You are offline</h1>
+        <p>Galmee will reconnect automatically. Sales you record are saved on this phone and sync when the internet is back.</p>
+      </section>
+      <button onclick="location.reload()">↻</button>
+    </main>
+  </body>
+</html>

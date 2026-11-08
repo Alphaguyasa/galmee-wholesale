@@ -52,7 +52,7 @@ export default async function CustomerPage({ params }: PageProps<"/[locale]/cust
           </dd>
         </div>
         <div className="flex items-baseline justify-between gap-3 px-4 py-3 md:px-2">
-          <dt>{t("creditLimit")}</dt>
+          <dt>{t("creditLimitLabel")}</dt>
           <dd className="money">{customer.creditLimit !== null ? formatBirr(customer.creditLimit, locale) : t("noLimit")}</dd>
         </div>
       </dl>

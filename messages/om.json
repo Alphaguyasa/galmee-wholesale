@@ -90,7 +90,8 @@
     "errorName": "Maqaa maamilaa galchaa (yoo xiqqaate qubee 2).",
     "errorPhone": "Lakkoofsi bilbilaa sirrii miti. 09… ykn +2519… fayyadamaa.",
     "errorLimit": "Daangaa liqaa lakkoofsaan galchaa, fakkeenyaaf 5000.",
-    "errorSave": "Maamilli hin galmoofne. Irra deebiʼaa yaalaa."
+    "errorSave": "Maamilli hin galmoofne. Irra deebiʼaa yaalaa.",
+    "creditLimitLabel": "Daangaa liqaa"
   },
   "Overdue": {
     "title": "Liqaa akka turtii isaatti",

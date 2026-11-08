@@ -63,10 +63,10 @@ export default async function CustomersPage({ params, searchParams }: PageProps<
             <li key={c.id}>
               <Link
                 href={`/customers/${c.id}`}
-                className="grid min-h-16 grid-cols-[1fr_auto] items-baseline gap-x-3 px-4 py-3 hover:bg-accent md:px-2"
+                className="grid min-h-16 grid-cols-[minmax(0,1fr)_auto] items-baseline gap-x-3 px-4 py-3 hover:bg-accent md:px-2"
               >
                 <span className="truncate font-bold">{c.name}</span>
-                <span className={`money ${c.balance > 0 ? "text-owed" : ""}`}>{formatBirr(c.balance, locale)}</span>
+                <span className={`money whitespace-nowrap ${c.balance > 0 ? "text-owed" : ""}`}>{formatBirr(c.balance, locale)}</span>
                 <span className="truncate text-sm text-muted-foreground">
                   {c.balance > 0 && c.daysOwing !== null ? t("sinceDays", { days: c.daysOwing }) : c.phone ?? t("settled")}
                 </span>

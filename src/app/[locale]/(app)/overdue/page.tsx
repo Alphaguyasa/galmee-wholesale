@@ -28,7 +28,7 @@ export default async function OverduePage({ params }: PageProps<"/[locale]/overd
         {buckets.map((b) => (
           <div key={b.key} className="grid gap-1 p-3">
             <dt className="text-sm">{b.label}</dt>
-            <dd className="money text-sm break-all">{formatBirr(b.total, locale)}</dd>
+            <dd className="money text-sm [overflow-wrap:anywhere]">{formatBirr(b.total, locale)}</dd>
           </div>
         ))}
       </dl>
@@ -40,9 +40,9 @@ export default async function OverduePage({ params }: PageProps<"/[locale]/overd
           {rows.map((r) => (
             <li key={r.id}>
               <Link href={`/customers/${r.id}`} className="grid gap-1 px-4 py-3 hover:bg-accent md:px-2">
-                <span className="flex items-baseline justify-between gap-3">
+                <span className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-3">
                   <span className="truncate font-bold">{r.name}</span>
-                  <span className="money text-owed">{formatBirr(r.total, locale)}</span>
+                  <span className="money whitespace-nowrap text-owed">{formatBirr(r.total, locale)}</span>
                 </span>
                 <span className="flex items-center gap-1.5 text-sm text-late">
                   <Clock className="size-4 shrink-0" aria-hidden />
@@ -51,15 +51,15 @@ export default async function OverduePage({ params }: PageProps<"/[locale]/overd
                 <span className="grid grid-cols-3 gap-2 text-sm text-muted-foreground">
                   <span>
                     <span className="block">{t("bucket0")}</span>
-                    <span className="money">{formatBirr(r.days0To30, locale)}</span>
+                    <span className="money [overflow-wrap:anywhere]">{formatBirr(r.days0To30, locale)}</span>
                   </span>
                   <span>
                     <span className="block">{t("bucket31")}</span>
-                    <span className="money">{formatBirr(r.days31To60, locale)}</span>
+                    <span className="money [overflow-wrap:anywhere]">{formatBirr(r.days31To60, locale)}</span>
                   </span>
                   <span>
                     <span className="block">{t("bucket60")}</span>
-                    <span className="money">{formatBirr(r.daysOver60, locale)}</span>
+                    <span className="money [overflow-wrap:anywhere]">{formatBirr(r.daysOver60, locale)}</span>
                   </span>
                 </span>
               </Link>

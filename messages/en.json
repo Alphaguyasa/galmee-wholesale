@@ -90,7 +90,8 @@
     "errorName": "Enter the customer name (2 letters or more).",
     "errorPhone": "That phone number is not valid. Use 09… or +2519…",
     "errorLimit": "Enter the credit limit as a number, for example 5000.",
-    "errorSave": "The customer was not saved. Try again."
+    "errorSave": "The customer was not saved. Try again.",
+    "creditLimitLabel": "Credit limit"
   },
   "Overdue": {
     "title": "Overdue by age",

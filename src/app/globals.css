@@ -1,57 +1,45 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@import "@fontsource-variable/noto-sans";
-@import "@fontsource-variable/noto-sans-ethiopic";
 
-@custom-variant dark (&:is(.dark *));
-
-/* shadcn/ui tokens (new-york, neutral) with a Galmee green primary. */
+/* Palette and rationale: docs/DESIGN.md */
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.45 0.12 155);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.45 0.12 155);
-}
+  --tarp: #0f4c5c;
+  --jerrycan: #f5b700;
+  --floor: #f3f4f1;
+  --ink: #14242a;
+  --sack-line: #cbd3d3;
+  --owed: #ab2318;
+  --paid: #1b6b4a;
+  --late: #8a5200;
 
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.7 0.14 155);
-  --primary-foreground: oklch(0.145 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.7 0.14 155);
+  --radius: 0.5rem;
+  --background: var(--floor);
+  --foreground: var(--ink);
+  --card: #ffffff;
+  --card-foreground: var(--ink);
+  --popover: #ffffff;
+  --popover-foreground: var(--ink);
+  --primary: var(--tarp);
+  --primary-foreground: #ffffff;
+  --secondary: #e4e8e7;
+  --secondary-foreground: var(--ink);
+  --muted: #e4e8e7;
+  --muted-foreground: #45575e;
+  --accent: #dbe7e9;
+  --accent-foreground: var(--tarp);
+  --destructive: var(--owed);
+  --border: var(--sack-line);
+  --input: #8a9a9e;
+  --ring: var(--tarp);
 }
 
 @theme inline {
-  --font-sans: "Noto Sans Variable", "Noto Sans Ethiopic Variable", ui-sans-serif, system-ui,
-    sans-serif;
+  --font-sans: var(--font-latin), var(--font-ethiopic), ui-sans-serif, system-ui, sans-serif;
+  --color-tarp: var(--tarp);
+  --color-jerrycan: var(--jerrycan);
+  --color-owed: var(--owed);
+  --color-paid: var(--paid);
+  --color-late: var(--late);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -82,5 +70,29 @@
   }
   body {
     @apply bg-background text-foreground font-sans antialiased;
+  }
+}
+
+@layer components {
+  /* Money is always tabular so columns of figures line up. */
+  .money {
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+  }
+}
+
+/* Ethiopic glyphs are dense at small sizes. */
+:lang(am) body {
+  font-size: 1.02em;
+  line-height: 1.65;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

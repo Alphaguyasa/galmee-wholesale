@@ -58,8 +58,8 @@
 
 ## Q: Quality and security baseline (do these inside M0 and M1, not after)
 
-- [ ] `docs/DESIGN.md` written per the frontend guidelines (palette, type with Ethiopic support, layout wireframes, reviewed against generic defaults)
-- [ ] Tailwind theme tokens and `next/font` fonts from DESIGN.md
+- [x] `docs/DESIGN.md` written per the frontend guidelines (palette, type with Ethiopic support, layout wireframes, reviewed against generic defaults)
+- [x] Tailwind theme tokens and `next/font` fonts from DESIGN.md
 - [ ] `server-only` Data Access Layer in `src/server/dal/`; every Server Action validates with zod and re-checks auth + role
 - [ ] Security headers and CSP with nonce (the security guidelines section 5)
 - [ ] Cross-tenant RLS test extended to this product's tables and passing

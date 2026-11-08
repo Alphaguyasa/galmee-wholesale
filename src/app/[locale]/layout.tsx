@@ -4,6 +4,7 @@ import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { ServiceWorkerRegister } from "@/components/service-worker-register";
+import { ethiopic, latin } from "../fonts";
 import "../globals.css";
 
 export function generateStaticParams() {
@@ -26,7 +27,7 @@ export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Pr
 }
 
 export const viewport: Viewport = {
-  themeColor: "#1f7a4d",
+  themeColor: "#0f4c5c",
   width: "device-width",
   initialScale: 1,
 };
@@ -37,7 +38,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
   setRequestLocale(locale);
 
   return (
-    <html lang={locale} className="h-full">
+    <html lang={locale} className={`h-full ${latin.variable} ${ethiopic.variable}`}>
       <body className="flex min-h-full flex-col">
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
         <ServiceWorkerRegister />

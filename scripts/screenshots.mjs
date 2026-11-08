@@ -1,6 +1,6 @@
 // Screenshots of key screens at 360x800 and 1280x800 in Amharic and English.
 // Usage: npm run build && npm start (port 3000), then `node scripts/screenshots.mjs [baseUrl]`.
-// Uses the Playwright that is installed globally in the routine sandbox
+// Uses the Playwright that is installed globally in the build environment
 // (or `npx playwright install chromium` locally).
 import { createRequire } from "node:module";
 import { execSync } from "node:child_process";

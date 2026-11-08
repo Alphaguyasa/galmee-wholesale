@@ -40,6 +40,19 @@ export const customerSchema = z.object({
     .transform((v) => (v === "" ? null : v)),
 });
 
+export const PAY_METHODS = ["cash", "telebirr", "cbe_birr", "bank", "other"] as const;
+
+export const repaymentSchema = z.object({
+  customer: uuidParam,
+  amount: z.coerce.number().positive().max(100_000_000),
+  method: z.enum(PAY_METHODS),
+  reference: z
+    .string()
+    .trim()
+    .max(80)
+    .transform((v) => v || undefined),
+});
+
 export function formToObject(formData: FormData, keys: readonly string[]) {
   return Object.fromEntries(keys.map((k) => [k, formData.get(k) ?? ""]));
 }

@@ -38,6 +38,12 @@ begin
   select * into s from public.wh_ageing_totals();
   r := r || format('totals=%s/%s/%s (expect 30/30/0); ', s.days_0_30::int, s.days_31_60::int, s.days_over_60::int);
 
+  select count(*) into n from public.wh_customer_statement where customer_id = cb;
+  r := r || 'A sees B statement=' || n || ' (expect 0); ';
+  select balance_after::int as b into a from public.wh_customer_statement
+    where customer_id = ca order by created_at desc, id desc limit 1;
+  r := r || 'last running balance=' || a.b || ' (expect 60); ';
+
   perform set_config('request.jwt.claims', json_build_object('sub', ub, 'role','authenticated')::text, true);
   select * into s from public.wh_owed_summary();
   r := r || format('B summary=%s/%s (expect 999/1); ', s.total_owed::int, s.debtors);

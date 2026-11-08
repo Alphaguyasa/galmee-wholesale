@@ -22,6 +22,15 @@ export type AgeingRowDTO = {
   oldestDays: number;
 };
 
+export type StatementRowDTO = {
+  id: string;
+  isDebt: boolean;
+  amount: number;
+  balanceAfter: number;
+  at: string;
+  note: string | null;
+};
+
 const DAY_MS = 86_400_000;
 
 function daysSince(iso: string | null): number | null {
@@ -134,4 +143,48 @@ export async function getAgeingTotals(): Promise<{ days0To30: number; days31To60
     days31To60: data[0].days_31_60,
     daysOver60: data[0].days_over_60,
   };
+}
+
+/** Every debt and repayment for one customer, newest first, with the balance after each. */
+export async function getStatement(customerId: string): Promise<StatementRowDTO[]> {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("wh_customer_statement")
+    .select("id, type, amount, balance_after, created_at, note")
+    .eq("customer_id", customerId)
+    .order("created_at", { ascending: false })
+    .order("id", { ascending: false })
+    .limit(200);
+  if (error) throw new Error("statement_load_failed");
+  return data.flatMap((row) =>
+    row.id && row.created_at
+      ? [
+          {
+            id: row.id,
+            isDebt: row.type === "debt",
+            amount: row.amount ?? 0,
+            balanceAfter: row.balance_after ?? 0,
+            at: row.created_at,
+            note: row.note,
+          },
+        ]
+      : [],
+  );
+}
+
+/** Records a repayment through the core RPC, which writes the payment and the ledger entry together. */
+export async function recordRepayment(input: {
+  customer: string;
+  amount: number;
+  method: "cash" | "telebirr" | "cbe_birr" | "bank" | "other";
+  reference: string | undefined;
+}): Promise<{ ok: boolean }> {
+  const supabase = await createClient();
+  const { error } = await supabase.rpc("record_repayment", {
+    p_customer: input.customer,
+    p_amount: input.amount,
+    p_method: input.method,
+    p_reference: input.reference,
+  });
+  return { ok: !error };
 }

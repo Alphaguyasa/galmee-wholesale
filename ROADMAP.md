@@ -16,16 +16,16 @@
 
 - [x] Customers: list, search by name/phone, detail with balance
 - [ ] Items and stock (if this product uses stock): list, add, receive stock
-- [ ] Payments and credit: record payment, credit statement
+- [x] Payments and credit: record payment, credit statement
 - [ ] Reports: today / this week / this Ethiopian month; export CSV
 - [ ] Offline queue for the main money action with sync status indicator
 
 ## M2: Galmee Wholesale features
 
 - [x] Customers sorted by amount owed (from `customer_balances`)
-- [ ] Customer statement: every debt and repayment with running balance
+- [x] Customer statement: every debt and repayment with running balance
 - [ ] Quick 'give on credit' sale using `record_sale` with paid < total
-- [ ] Repayment entry using `record_repayment`
+- [x] Repayment entry using `record_repayment`
 - [x] Overdue list with ageing buckets 0-30 / 31-60 / 60+ days
 - [ ] Stock in/out and daily cash report
 - [ ] Migration: wh_price_lists

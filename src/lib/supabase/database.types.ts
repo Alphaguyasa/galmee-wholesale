@@ -2275,6 +2275,42 @@ export type Database = {
           },
         ]
       }
+      wh_customer_statement: {
+        Row: {
+          amount: number | null
+          balance_after: number | null
+          created_at: string | null
+          customer_id: string | null
+          due_date: string | null
+          id: string | null
+          note: string | null
+          tenant_id: string | null
+          type: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "credit_ledger_customer_id_fkey"
+            columns: ["customer_id"]
+            isOneToOne: false
+            referencedRelation: "customer_balances"
+            referencedColumns: ["customer_id"]
+          },
+          {
+            foreignKeyName: "credit_ledger_customer_id_fkey"
+            columns: ["customer_id"]
+            isOneToOne: false
+            referencedRelation: "customers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "credit_ledger_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Functions: {
       adjust_stock: {

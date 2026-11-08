@@ -1,19 +1,25 @@
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { Check, Phone, TriangleAlert } from "lucide-react";
+import { ArrowDownLeft, ArrowUpRight, Check, Phone, TriangleAlert } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import type { AppLocale } from "@/i18n/routing";
+import { formatEthiopianDate } from "@/lib/ethiopian-calendar";
 import { formatBirr } from "@/lib/money";
-import { getCustomer } from "@/server/dal/customers";
+import { getCustomer, getStatement } from "@/server/dal/customers";
 import { uuidParam } from "@/server/validation";
 
-export default async function CustomerPage({ params }: PageProps<"/[locale]/customers/[id]">) {
-  const { locale: rawLocale, id } = await params;
+export default async function CustomerPage({ params, searchParams }: PageProps<"/[locale]/customers/[id]">) {
+  const [{ locale: rawLocale, id }, sp] = await Promise.all([params, searchParams]);
   setRequestLocale(rawLocale);
   const locale = rawLocale as AppLocale;
   if (!uuidParam.safeParse(id).success) notFound();
 
-  const [t, customer] = await Promise.all([getTranslations("Customers"), getCustomer(id)]);
+  const [t, customer, statement] = await Promise.all([
+    getTranslations("Customers"),
+    getCustomer(id),
+    getStatement(id),
+  ]);
   if (!customer) notFound();
 
   const owes = customer.balance > 0;
@@ -63,6 +69,47 @@ export default async function CustomerPage({ params }: PageProps<"/[locale]/cust
           {t("overLimit")}
         </p>
       ) : null}
+
+      {sp.saved === "1" ? (
+        <p role="status" className="mx-4 mt-3 flex items-center gap-2 rounded-md border border-paid p-3 text-paid md:mx-0">
+          <Check className="size-5 shrink-0" aria-hidden />
+          {t("repaymentSaved")}
+        </p>
+      ) : null}
+
+      {owes ? (
+        <div className="px-4 pt-4 md:px-0">
+          <Button asChild size="lg" className="w-full md:w-auto">
+            <Link href={`/customers/${customer.id}/repay`}>{t("recordRepayment")}</Link>
+          </Button>
+        </div>
+      ) : null}
+
+      <section className="mt-6">
+        <h2 className="px-4 text-lg font-bold md:px-0">{t("statement")}</h2>
+        {statement.length === 0 ? (
+          <p className="px-4 py-4 md:px-0">{t("statementEmpty")}</p>
+        ) : (
+          <ul className="mt-2 divide-y divide-border border-y">
+            {statement.map((row) => (
+              <li key={row.id} className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-x-3 px-4 py-3 md:px-2">
+                <span className={`flex items-center gap-1.5 font-bold ${row.isDebt ? "text-owed" : "text-paid"}`}>
+                  {row.isDebt ? <ArrowUpRight className="size-4 shrink-0" aria-hidden /> : <ArrowDownLeft className="size-4 shrink-0" aria-hidden />}
+                  {row.isDebt ? t("debt") : t("repayment")}
+                </span>
+                <span className="money whitespace-nowrap">{formatBirr(row.amount, locale)}</span>
+                <time dateTime={row.at} className="text-sm text-muted-foreground">
+                  {formatEthiopianDate(row.at, locale)}
+                </time>
+                <span className="money text-sm whitespace-nowrap text-muted-foreground">
+                  {t("balanceAfter", { amount: formatBirr(row.balanceAfter, locale) })}
+                </span>
+                {row.note ? <span className="col-span-2 text-sm text-muted-foreground">{row.note}</span> : null}
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
     </div>
   );
 }

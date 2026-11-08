@@ -7,9 +7,8 @@ import { ServiceWorkerRegister } from "@/components/service-worker-register";
 import { ethiopic, latin } from "../fonts";
 import "../globals.css";
 
-export function generateStaticParams() {
-  return routing.locales.map((locale) => ({ locale }));
-}
+// Every page needs this request's CSP nonce, so nothing is prerendered.
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Promise<Metadata> {
   const { locale } = await params;

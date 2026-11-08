@@ -1,17 +1,18 @@
-import { use } from "react";
-import { useTranslations } from "next-intl";
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { BookOpenText, CalendarClock, ListOrdered, WifiOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { LanguageSwitcher } from "@/components/language-switcher";
+import { Logo } from "@/components/logo";
 import { TodayEthiopian } from "@/components/today-ethiopian";
+import { Link } from "@/i18n/navigation";
 import type { AppLocale } from "@/i18n/routing";
+import { getUserId, redirectTo } from "@/server/dal/session";
 
-export default function HomePage({ params }: PageProps<"/[locale]">) {
-  const { locale } = use(params);
+export default async function HomePage({ params }: PageProps<"/[locale]">) {
+  const { locale } = await params;
   setRequestLocale(locale);
-  const t = useTranslations();
+  if (await getUserId()) return redirectTo("/customers");
+  const t = await getTranslations();
 
   const features = [
     { icon: ListOrdered, text: t("Home.features.owed") },
@@ -21,40 +22,42 @@ export default function HomePage({ params }: PageProps<"/[locale]">) {
   ];
 
   return (
-    <main className="mx-auto flex w-full max-w-md flex-1 flex-col gap-6 px-4 py-6">
-      <header className="flex items-center justify-between gap-3">
-        <span className="text-lg font-bold text-primary">{t("App.name")}</span>
-        <LanguageSwitcher />
+    <main className="flex min-h-dvh w-full flex-1 flex-col">
+      <header className="flex items-center justify-between gap-3 bg-tarp px-4 py-3 text-white">
+        <span className="flex items-center gap-2 font-bold" translate="no">
+          <Logo inverse />
+          {t("App.name")}
+        </span>
+        <LanguageSwitcher inverse />
       </header>
 
-      <section className="flex flex-col gap-3">
-        <h1 className="text-2xl font-bold leading-snug">{t("App.tagline")}</h1>
-        <p className="text-sm text-muted-foreground">
-          {t("Home.today")}: <TodayEthiopian locale={locale as AppLocale} />
-        </p>
+      <section className="bg-jerrycan px-4 py-8 text-ink">
+        <div className="mx-auto max-w-xl">
+          <h1 className="text-[1.75rem] leading-tight font-bold text-balance">{t("App.tagline")}</h1>
+          <p className="mt-3 text-sm">
+            {t("Home.today")}: <TodayEthiopian locale={locale as AppLocale} />
+          </p>
+        </div>
       </section>
 
-      <Card>
-        <CardContent>
-          <ul className="flex flex-col gap-4">
-            {features.map(({ icon: Icon, text }) => (
-              <li key={text} className="flex items-start gap-3">
-                <Icon className="mt-0.5 size-5 text-primary" aria-hidden />
-                <span>{text}</span>
-              </li>
-            ))}
-          </ul>
-        </CardContent>
-      </Card>
+      <div className="mx-auto flex w-full max-w-xl flex-1 flex-col gap-6 px-4 py-6">
+        <ul className="divide-y divide-border">
+          {features.map(({ icon: Icon, text }) => (
+            <li key={text} className="flex items-start gap-3 py-3">
+              <Icon className="mt-0.5 size-5 shrink-0 text-tarp" aria-hidden />
+              <span>{text}</span>
+            </li>
+          ))}
+        </ul>
 
-      <div className="mt-auto flex flex-col gap-3">
-        {/* Auth screens land in the next ROADMAP step. */}
-        <Button size="lg" disabled>
-          {t("Home.getStarted")}
-        </Button>
-        <Button size="lg" variant="outline" disabled>
-          {t("Home.logIn")}
-        </Button>
+        <div className="mt-auto flex flex-col gap-3">
+          <Button size="lg" asChild>
+            <Link href="/signup">{t("Home.getStarted")}</Link>
+          </Button>
+          <Button size="lg" variant="outline" asChild>
+            <Link href="/login">{t("Home.logIn")}</Link>
+          </Button>
+        </div>
       </div>
     </main>
   );

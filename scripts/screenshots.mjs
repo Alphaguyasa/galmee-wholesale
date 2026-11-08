@@ -14,7 +14,16 @@ try {
 }
 
 const base = process.argv[2] ?? "http://localhost:3000";
-const pages = [{ name: "home", path: "" }];
+const pages = [
+  { name: "home", path: "" },
+  { name: "login", path: "/login" },
+  { name: "signup", path: "/signup" },
+];
+// Extra screens as "name:/path,name:/path" (logged-in screens need a session or fixture data).
+for (const extra of (process.env.SHOT_EXTRA ?? "").split(",").filter(Boolean)) {
+  const [name, path] = extra.split(":");
+  pages.push({ name, path });
+}
 const locales = ["am", "en"];
 const viewports = [
   { name: "360", width: 360, height: 800 },

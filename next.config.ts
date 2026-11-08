@@ -1,9 +1,12 @@
 import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
+import { STATIC_SECURITY_HEADERS } from "./src/lib/security-headers";
 
 const nextConfig: NextConfig = {
-  cacheComponents: true,
-  partialPrefetching: true,
+  poweredByHeader: false,
+  experimental: {
+    taint: true,
+  },
   turbopack: {
     rules: {
       "*.css": {
@@ -14,6 +17,7 @@ const nextConfig: NextConfig = {
   },
   async headers() {
     return [
+      { source: "/:path*", headers: STATIC_SECURITY_HEADERS },
       {
         source: "/sw.js",
         headers: [

@@ -24,5 +24,80 @@
   "Offline": {
     "title": "Interneetii hin qabdu",
     "body": "Galmeen ofumaan deebi'ee walqunnama. Gurgurtaan ati galmeessitu bilbila kana irratti olkaa'amee yeroo interneetiin deebi'u walsimsiifama."
+  },
+  "Auth": {
+    "loginTitle": "Gara suuqii keessanii seenaa",
+    "signupTitle": "Herrega uumaa",
+    "email": "Imeelii",
+    "password": "Jecha icciitii",
+    "passwordHint": "Yoo xiqqaate qubee {min}.",
+    "login": "Seeni",
+    "signup": "Herrega uumi",
+    "logout": "Ba'i",
+    "noAccount": "Herrega hin qabduu?",
+    "haveAccount": "Herrega qabduu?",
+    "errorInvalid": "Imeeliin ykn jechi icciitii dogoggora. Mirkaneessitanii irra deebiʼaa.",
+    "errorPassword": "Jechi icciitii gabaabaa dha. Yoo xiqqaate qubee 10 fayyadamaa.",
+    "errorEmail": "Imeeliin sirrii miti. Mirkaneessitanii irra deebiʼaa.",
+    "errorGeneric": "Herregni hin uumamne. Irra deebiʼaa yaalaa.",
+    "checkEmail": "Herregni uumameera. Liinkii imeelii keessanitti ergine banaatii seenaa."
+  },
+  "Onboarding": {
+    "title": "Suuqii keessan qopheessaa",
+    "intro": "Daqiiqaa tokko qofa fudhata. Isin abbaa suuqii kanaa taatu.",
+    "shopName": "Maqaa suuqii",
+    "fullName": "Maqaa guutuu keessan",
+    "phone": "Lakkoofsa bilbilaa",
+    "submit": "Suuqii uumi",
+    "errorPhone": "Lakkoofsi bilbilaa sirrii miti. 09… ykn +2519… fayyadamaa.",
+    "errorRequired": "Bakkeewwan hunda guutaa.",
+    "error": "Suuqiin hin uumamne. Irra deebiʼaa yaalaa."
+  },
+  "Nav": {
+    "menu": "Baafata guddaa",
+    "customers": "Liqaaffattoota",
+    "overdue": "Yeroon darbe"
+  },
+  "Roles": {
+    "owner": "Abbaa qabeenyaa",
+    "manager": "Hogganaa",
+    "staff": "Hojjetaa"
+  },
+  "Common": {
+    "skipToContent": "Gara qabiyyeetti darbi",
+    "loadError": "Fuulli hin banamne. Interneetii keessan mirkaneessitanii irra deebiʼaa.",
+    "retry": "Irra deebiʼi"
+  },
+  "Customers": {
+    "totalOwed": "Liqaa walii galaa",
+    "debtors": "{count, plural, =0 {Maamilli liqaa qabu hin jiru} other {Maamiltoota # liqaa qaban}}",
+    "search": "Maqaa ykn bilbilaan barbaadi",
+    "empty": "Ammaaf maamilli hin jiru. Maamila jalqabaa dabalaa.",
+    "noMatch": "Maamilli \"{query}\" wajjin walfakkaatu hin jiru.",
+    "add": "Maamila dabali",
+    "addTitle": "Maamila dabalaa",
+    "save": "Maamila galmeessi",
+    "name": "Maqaa",
+    "phone": "Bilbila (yoo jiraate)",
+    "creditLimit": "Daangaa liqaa (yoo jiraate)",
+    "creditLimitHint": "Maamilli kun hanga guddaa liqeeffachuu dandaʼu, birriin.",
+    "sinceDays": "{days, plural, =0 {Harʼa irraa kaasee liqaa} other {Guyyaa # liqaa}}",
+    "settled": "Liqaan hin jiru",
+    "back": "Gara maamiltootaatti deebiʼi",
+    "balance": "Liqaa isaa",
+    "noLimit": "Daangaa hin qabu",
+    "overLimit": "Maamilli kun daangaa liqaa isaa ol liqaa qaba.",
+    "errorName": "Maqaa maamilaa galchaa (yoo xiqqaate qubee 2).",
+    "errorPhone": "Lakkoofsi bilbilaa sirrii miti. 09… ykn +2519… fayyadamaa.",
+    "errorLimit": "Daangaa liqaa lakkoofsaan galchaa, fakkeenyaaf 5000.",
+    "errorSave": "Maamilli hin galmoofne. Irra deebiʼaa yaalaa."
+  },
+  "Overdue": {
+    "title": "Liqaa akka turtii isaatti",
+    "bucket0": "Guyyaa 0–30",
+    "bucket31": "Guyyaa 31–60",
+    "bucket60": "Guyyaa 60 ol",
+    "oldest": "{days, plural, =0 {Kan durii: harʼa} other {Kan durii: guyyaa #}}",
+    "empty": "Amma namni liqaa qabu hin jiru."
   }
 }

@@ -36,6 +36,7 @@
 @theme inline {
   --font-sans: var(--font-latin), var(--font-ethiopic), ui-sans-serif, system-ui, sans-serif;
   --color-tarp: var(--tarp);
+  --color-ink: var(--ink);
   --color-jerrycan: var(--jerrycan);
   --color-owed: var(--owed);
   --color-paid: var(--paid);

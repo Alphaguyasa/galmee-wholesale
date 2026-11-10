@@ -56,7 +56,8 @@
   "Nav": {
     "menu": "ዋና ምናሌ",
     "customers": "ባለዕዳዎች",
-    "overdue": "ያለፈባቸው"
+    "overdue": "ያለፈባቸው",
+    "items": "ዕቃ"
   },
   "Roles": {
     "owner": "ባለቤት",
@@ -120,5 +121,28 @@
     "bucket60": "ከ60 ቀናት በላይ",
     "oldest": "{days, plural, =0 {የቆየው ያልተከፈለ፦ ዛሬ} other {የቆየው ያልተከፈለ፦ # ቀናት}}",
     "empty": "አሁን ማንም ዕዳ የለበትም።"
+  },
+  "Items": {
+    "title": "በመጋዘን ያሉ ዕቃዎች",
+    "lowCount": "{count, plural, =0 {ያለቀ ዕቃ የለም} other {# ዕቃዎች እያለቁ ነው}}",
+    "search": "ዕቃ ፈልግ",
+    "noMatch": "“{query}” የሚመስል ዕቃ የለም።",
+    "empty": "እስካሁን ዕቃ የለም።",
+    "onHand": "{qty} {unit} አለ",
+    "low": "እያለቀ ነው",
+    "pricePer": "{price} / {unit}",
+    "receiveShort": "ተቀበል",
+    "receiveFor": "ለ{name} ዕቃ ተቀበል",
+    "received": "ተቀምጧል። {name}፦ አሁን {qty} {unit} አለ።",
+    "back": "ወደ ዕቃዎች ተመለስ",
+    "receiveTitle": "{name} ተቀበል",
+    "qty": "የገባው ብዛት ({unit})",
+    "costPerUnit": "የአንዱ ዋጋ (በብር)",
+    "batch": "የባች ወይም የደረሰኝ ቁጥር",
+    "batchHint": "አማራጭ። ይህን ገቢ በኋላ ለማግኘት ይረዳል።",
+    "receive": "ገቢውን አስቀምጥ",
+    "errorQty": "ከዜሮ በላይ ብዛት ያስገቡ።",
+    "errorCost": "የአንዱን ዋጋ ያስገቡ (ዜሮ ወይም ከዚያ በላይ)።",
+    "errorSave": "ገቢው አልተቀመጠም። እንደገና ይሞክሩ።"
   }
 }

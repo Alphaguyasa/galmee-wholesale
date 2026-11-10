@@ -56,3 +56,14 @@ export const repaymentSchema = z.object({
 export function formToObject(formData: FormData, keys: readonly string[]) {
   return Object.fromEntries(keys.map((k) => [k, formData.get(k) ?? ""]));
 }
+
+export const receiveStockSchema = z.object({
+  item: uuidParam,
+  qty: z.coerce.number().positive().max(10_000_000),
+  cost: z.coerce.number().min(0).max(100_000_000),
+  batch: z
+    .string()
+    .trim()
+    .max(60)
+    .transform((v) => v || undefined),
+});

@@ -8,3 +8,12 @@ describe("formatBirr", () => {
     expect(formatBirr(0, "om")).toBe("0.00 ETB");
   });
 });
+
+describe("formatQty", () => {
+  it("drops trailing zeros and groups thousands", async () => {
+    const { formatQty } = await import("./money");
+    expect(formatQty(1200)).toBe("1,200");
+    expect(formatQty(2.5)).toBe("2.5");
+    expect(formatQty(0)).toBe("0");
+  });
+});

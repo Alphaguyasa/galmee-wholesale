@@ -56,7 +56,8 @@
   "Nav": {
     "menu": "Main menu",
     "customers": "Who owes",
-    "overdue": "Overdue"
+    "overdue": "Overdue",
+    "items": "Stock"
   },
   "Roles": {
     "owner": "Owner",
@@ -120,5 +121,28 @@
     "bucket60": "60+ days",
     "oldest": "{days, plural, =0 {Oldest unpaid: today} =1 {Oldest unpaid: 1 day} other {Oldest unpaid: # days}}",
     "empty": "Nobody owes you anything right now."
+  },
+  "Items": {
+    "title": "Items in stock",
+    "lowCount": "{count, plural, =0 {Nothing is running low} one {# item running low} other {# items running low}}",
+    "search": "Search items",
+    "noMatch": "No item matches “{query}”.",
+    "empty": "No items yet.",
+    "onHand": "{qty} {unit} on hand",
+    "low": "low",
+    "pricePer": "{price} per {unit}",
+    "receiveShort": "Receive",
+    "receiveFor": "Receive stock for {name}",
+    "received": "Saved. {name}: {qty} {unit} on hand now.",
+    "back": "Back to stock",
+    "receiveTitle": "Receive {name}",
+    "qty": "Quantity received ({unit})",
+    "costPerUnit": "Cost per unit (birr)",
+    "batch": "Batch or invoice number",
+    "batchHint": "Optional. Helps you find this delivery later.",
+    "receive": "Save delivery",
+    "errorQty": "Enter a quantity above zero.",
+    "errorCost": "Enter the cost per unit (zero or more).",
+    "errorSave": "The delivery was not saved. Try again."
   }
 }

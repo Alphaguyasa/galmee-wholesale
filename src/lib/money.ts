@@ -7,3 +7,10 @@ export function formatBirr(amount: number, locale: AppLocale): string {
   const text = NUMBER.format(amount);
   return locale === "am" ? `ብር ${text}` : `${text} ETB`;
 }
+
+const QTY = new Intl.NumberFormat("en-US", { maximumFractionDigits: 3 });
+
+/** Stock quantity for display: no trailing zeros, thousands separated. */
+export function formatQty(qty: number): string {
+  return QTY.format(qty);
+}

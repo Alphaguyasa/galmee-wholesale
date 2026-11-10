@@ -1,13 +1,14 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { CalendarClock, ListOrdered } from "lucide-react";
+import { Boxes, CalendarClock, ListOrdered } from "lucide-react";
 import { Link, usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 
 const ITEMS = [
   { href: "/customers", key: "customers", icon: ListOrdered },
   { href: "/overdue", key: "overdue", icon: CalendarClock },
+  { href: "/items", key: "items", icon: Boxes },
 ] as const;
 
 /** Bottom tab bar on phones, vertical list in the desktop sidebar. */

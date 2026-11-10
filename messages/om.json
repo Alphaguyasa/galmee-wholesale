@@ -56,7 +56,8 @@
   "Nav": {
     "menu": "Baafata guddaa",
     "customers": "Liqaaffattoota",
-    "overdue": "Yeroon darbe"
+    "overdue": "Yeroon darbe",
+    "items": "Meeshaa"
   },
   "Roles": {
     "owner": "Abbaa qabeenyaa",
@@ -120,5 +121,28 @@
     "bucket60": "Guyyaa 60 ol",
     "oldest": "{days, plural, =0 {Kan durii: harʼa} other {Kan durii: guyyaa #}}",
     "empty": "Amma namni liqaa qabu hin jiru."
+  },
+  "Items": {
+    "title": "Meeshaalee kuusaa keessa jiran",
+    "lowCount": "{count, plural, =0 {Meeshaan xumuramaa jiru hin jiru} one {Meeshaan # xumuramaa jira} other {Meeshaaleen # xumuramaa jiru}}",
+    "search": "Meeshaa barbaadi",
+    "noMatch": "Meeshaan “{query}” wajjin walsimu hin jiru.",
+    "empty": "Ammaaf meeshaan hin jiru.",
+    "onHand": "{qty} {unit} harka jira",
+    "low": "xumuramaa jira",
+    "pricePer": "{price} {unit} tokkoof",
+    "receiveShort": "Fudhadhu",
+    "receiveFor": "Meeshaa {name} fudhadhu",
+    "received": "Galmeeffameera. {name}: amma {qty} {unit} jira.",
+    "back": "Gara meeshaaleetti deebiʼi",
+    "receiveTitle": "{name} fudhadhu",
+    "qty": "Baay'ina gale ({unit})",
+    "costPerUnit": "Gatii tokkoo (birriin)",
+    "batch": "Lakkoofsa baachii ykn nagahee",
+    "batchHint": "Dirqama miti. Galtee kana booda argachuuf si gargaara.",
+    "receive": "Galtee galmeessi",
+    "errorQty": "Baay'ina zeeroo ol galchi.",
+    "errorCost": "Gatii tokkoo galchi (zeeroo ykn isaa ol).",
+    "errorSave": "Galteen hin galmoofne. Irra deebiʼaa yaalaa."
   }
 }

@@ -143,6 +143,21 @@
     "receive": "Save delivery",
     "errorQty": "Enter a quantity above zero.",
     "errorCost": "Enter the cost per unit (zero or more).",
-    "errorSave": "The delivery was not saved. Try again."
+    "errorSave": "The delivery was not saved. Try again.",
+    "add": "Add item",
+    "addTitle": "New item",
+    "nameEn": "Name in English",
+    "nameAm": "Name in Amharic",
+    "nameOm": "Name in Afaan Oromo",
+    "unit": "Unit",
+    "unitHint": "How you count it: bag, carton, jerrycan, piece.",
+    "price": "Selling price per unit (birr)",
+    "cost": "Buying cost per unit (birr)",
+    "reorderLevel": "Warn me when stock falls to",
+    "saveItem": "Save item",
+    "errorRole": "Only the owner or a manager can add items.",
+    "errorUnit": "Enter a unit, for example bag.",
+    "errorNumber": "Prices and the warning level must be numbers, zero or more.",
+    "errorItemName": "Enter the English name (at least 2 letters)."
   }
 }

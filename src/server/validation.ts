@@ -67,3 +67,19 @@ export const receiveStockSchema = z.object({
     .max(60)
     .transform((v) => v || undefined),
 });
+
+const optionalName = z
+  .string()
+  .trim()
+  .max(120)
+  .transform((v) => v || null);
+
+export const itemSchema = z.object({
+  nameEn: z.string().trim().min(2).max(120),
+  nameAm: optionalName,
+  nameOm: optionalName,
+  unit: z.string().trim().min(1).max(20),
+  price: z.coerce.number().min(0).max(100_000_000),
+  cost: z.coerce.number().min(0).max(100_000_000),
+  reorderLevel: z.coerce.number().min(0).max(10_000_000),
+});

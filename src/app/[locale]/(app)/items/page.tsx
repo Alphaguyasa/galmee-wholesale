@@ -1,10 +1,12 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { PackagePlus, Search } from "lucide-react";
+import { PackagePlus, Plus, Search } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Link } from "@/i18n/navigation";
 import type { AppLocale } from "@/i18n/routing";
 import { formatBirr, formatQty } from "@/lib/money";
 import { listItems } from "@/server/dal/items";
+import { getSession } from "@/server/dal/session";
 import { searchParam, uuidParam } from "@/server/validation";
 
 export default async function ItemsPage({ params, searchParams }: PageProps<"/[locale]/items">) {
@@ -16,7 +18,8 @@ export default async function ItemsPage({ params, searchParams }: PageProps<"/[l
   const query = parsed.success ? parsed.data : "";
   const receivedId = uuidParam.safeParse(sp.received);
 
-  const [t, items] = await Promise.all([getTranslations("Items"), listItems(query, locale)]);
+  const [t, items, session] = await Promise.all([getTranslations("Items"), listItems(query, locale), getSession()]);
+  const canAdd = session.profile.role !== "staff";
   const low = items.filter((i) => i.onHand <= i.reorderLevel).length;
   const received = receivedId.success ? items.find((i) => i.id === receivedId.data) : undefined;
 
@@ -71,6 +74,17 @@ export default async function ItemsPage({ params, searchParams }: PageProps<"/[l
           })}
         </ul>
       )}
+
+      {canAdd ? (
+        <div className="fixed right-4 bottom-20 z-30 md:static md:mt-6 md:flex md:justify-end">
+          <Button asChild size="lg" className="shadow-md md:shadow-none">
+            <Link href="/items/new">
+              <Plus aria-hidden />
+              {t("add")}
+            </Link>
+          </Button>
+        </div>
+      ) : null}
     </div>
   );
 }

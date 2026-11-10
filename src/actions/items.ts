@@ -2,9 +2,9 @@
 
 import { getLocale } from "next-intl/server";
 import type { AppLocale } from "@/i18n/routing";
-import { getItem, receiveStock } from "@/server/dal/items";
+import { addItem, getItem, receiveStock } from "@/server/dal/items";
 import { getSession, redirectTo } from "@/server/dal/session";
-import { formToObject, receiveStockSchema } from "@/server/validation";
+import { formToObject, itemSchema, receiveStockSchema } from "@/server/validation";
 import type { FormState } from "./auth";
 
 export async function addStock(_prev: FormState, formData: FormData): Promise<FormState> {
@@ -23,4 +23,24 @@ export async function addStock(_prev: FormState, formData: FormData): Promise<Fo
   const { ok } = await receiveStock(parsed.data);
   if (!ok) return { error: "errorSave" };
   return redirectTo(`/items?received=${item.id}`);
+}
+
+const ITEM_FIELDS = ["nameEn", "nameAm", "nameOm", "unit", "price", "cost", "reorderLevel"] as const;
+
+export async function createItem(_prev: FormState, formData: FormData): Promise<FormState> {
+  // Selling prices are the owner's decision: staff can receive goods but not add priced items.
+  const session = await getSession();
+  if (session.profile.role === "staff") return { error: "errorRole" };
+
+  const parsed = itemSchema.safeParse(formToObject(formData, ITEM_FIELDS));
+  if (!parsed.success) {
+    const field = parsed.error.issues[0]?.path[0];
+    if (field === "unit") return { error: "errorUnit" };
+    if (field === "price" || field === "cost" || field === "reorderLevel") return { error: "errorNumber" };
+    return { error: "errorItemName" };
+  }
+
+  const created = await addItem(parsed.data);
+  if (!created) return { error: "errorSave" };
+  return redirectTo(`/items/${created.id}/receive`);
 }

@@ -143,6 +143,21 @@
     "receive": "Galtee galmeessi",
     "errorQty": "Baay'ina zeeroo ol galchi.",
     "errorCost": "Gatii tokkoo galchi (zeeroo ykn isaa ol).",
-    "errorSave": "Galteen hin galmoofne. Irra deebiʼaa yaalaa."
+    "errorSave": "Galteen hin galmoofne. Irra deebiʼaa yaalaa.",
+    "add": "Meeshaa dabali",
+    "addTitle": "Meeshaa haaraa",
+    "nameEn": "Maqaa Afaan Ingiliziitiin",
+    "nameAm": "Maqaa Afaan Amaariffaatiin",
+    "nameOm": "Maqaa Afaan Oromootiin",
+    "unit": "Safartuu",
+    "unitHint": "Akkamitti lakkooftu: kuntaala, kaartoonii, jeerikaanii, tokko.",
+    "price": "Gatii gurgurtaa tokkoo (birriin)",
+    "cost": "Gatii bittaa tokkoo (birriin)",
+    "reorderLevel": "Meeshaan yeroo kana gahu na yaadachiisi",
+    "saveItem": "Meeshaa galmeessi",
+    "errorRole": "Meeshaa dabaluu kan danda'an abbaa daldalaa ykn hoji-gaggeessaa qofa.",
+    "errorUnit": "Safartuu galchi, fakkeenyaaf kuntaala.",
+    "errorNumber": "Gatiiwwanii fi sadarkaan akeekkachiisaa lakkoofsa zeeroo ykn isaa ol ta'uu qabu.",
+    "errorItemName": "Maqaa Ingiliziitiin galchi (yoo xiqqaate qubee 2)."
   }
 }

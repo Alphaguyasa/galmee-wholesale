@@ -89,3 +89,29 @@ export async function receiveStock(input: { item: string; qty: number; cost: num
   });
   return { ok: !error };
 }
+
+export async function addItem(input: {
+  nameEn: string;
+  nameAm: string | null;
+  nameOm: string | null;
+  unit: string;
+  price: number;
+  cost: number;
+  reorderLevel: number;
+}): Promise<{ id: string } | null> {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("items")
+    .insert({
+      name_en: input.nameEn,
+      name_am: input.nameAm,
+      name_om: input.nameOm,
+      unit: input.unit,
+      price: input.price,
+      cost: input.cost,
+      reorder_level: input.reorderLevel,
+    })
+    .select("id")
+    .single();
+  return error ? null : { id: data.id };
+}

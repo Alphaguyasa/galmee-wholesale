@@ -2607,6 +2607,19 @@ export type Database = {
           total_owed: number
         }[]
       }
+      wh_record_credit_sale: {
+        Args: {
+          p_client_ref?: string
+          p_customer: string
+          p_due?: string
+          p_lines: Json
+          p_method?: Database["public"]["Enums"]["pay_method"]
+          p_override?: boolean
+          p_paid?: number
+          p_reason?: string
+        }
+        Returns: string
+      }
     }
     Enums: {
       pay_method: "cash" | "telebirr" | "cbe_birr" | "chapa" | "bank" | "other"

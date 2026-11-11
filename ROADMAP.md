@@ -24,14 +24,14 @@
 
 - [x] Customers sorted by amount owed (from `customer_balances`)
 - [x] Customer statement: every debt and repayment with running balance
-- [ ] Quick 'give on credit' sale using `record_sale` with paid < total
+- [x] Quick 'give on credit' sale using `record_sale` with paid < total
 - [x] Repayment entry using `record_repayment`
 - [x] Overdue list with ageing buckets 0-30 / 31-60 / 60+ days
 - [ ] Stock in/out and daily cash report
 - [ ] Migration: wh_price_lists
 - [ ] Migration: wh_price_list_items
 - [ ] Migration: wh_customer_groups
-- [ ] Block a credit sale above the customer's `credit_limit` unless the owner overrides (log the override)
+- [x] Block a credit sale above the customer's `credit_limit` unless the owner overrides (log the override)
 - [x] Ageing buckets as a SQL view with security_invoker
 - [ ] Retail vs wholesale price per customer group
 

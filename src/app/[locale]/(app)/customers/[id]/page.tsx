@@ -15,8 +15,9 @@ export default async function CustomerPage({ params, searchParams }: PageProps<"
   const locale = rawLocale as AppLocale;
   if (!uuidParam.safeParse(id).success) notFound();
 
-  const [t, customer, statement] = await Promise.all([
+  const [t, ts, customer, statement] = await Promise.all([
     getTranslations("Customers"),
+    getTranslations("Sales"),
     getCustomer(id),
     getStatement(id),
   ]);
@@ -77,13 +78,23 @@ export default async function CustomerPage({ params, searchParams }: PageProps<"
         </p>
       ) : null}
 
-      {owes ? (
-        <div className="px-4 pt-4 md:px-0">
+      {sp.sold === "1" ? (
+        <p role="status" className="mx-4 mt-3 flex items-center gap-2 rounded-md border border-paid p-3 text-paid md:mx-0">
+          <Check className="size-5 shrink-0" aria-hidden />
+          {ts("saved")}
+        </p>
+      ) : null}
+
+      <div className="grid gap-3 px-4 pt-4 md:flex md:px-0">
+        <Button asChild size="lg" variant={owes ? "outline" : "default"} className="w-full md:w-auto">
+          <Link href={`/customers/${customer.id}/sell`}>{ts("give")}</Link>
+        </Button>
+        {owes ? (
           <Button asChild size="lg" className="w-full md:w-auto">
             <Link href={`/customers/${customer.id}/repay`}>{t("recordRepayment")}</Link>
           </Button>
-        </div>
-      ) : null}
+        ) : null}
+      </div>
 
       <section className="mt-6">
         <h2 className="px-4 text-lg font-bold md:px-0">{t("statement")}</h2>

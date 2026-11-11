@@ -83,3 +83,44 @@ export const itemSchema = z.object({
   cost: z.coerce.number().min(0).max(100_000_000),
   reorderLevel: z.coerce.number().min(0).max(10_000_000),
 });
+
+export const MAX_SALE_LINES = 30;
+
+const saleLineSchema = z.object({
+  item: uuidParam,
+  qty: z.coerce.number().positive().max(10_000_000),
+});
+
+/** A sale to a known customer where part or all of the total may stay on credit. */
+export const creditSaleSchema = z.object({
+  customer: uuidParam,
+  clientRef: uuidParam,
+  lines: z
+    .string()
+    .max(10_000)
+    .transform((v, ctx) => {
+      try {
+        return JSON.parse(v) as unknown;
+      } catch {
+        ctx.addIssue({ code: "custom", message: "lines_json" });
+        return z.NEVER;
+      }
+    })
+    .pipe(z.array(saleLineSchema).min(1).max(MAX_SALE_LINES)),
+  paid: z.union([z.literal(""), z.coerce.number().min(0).max(100_000_000)]).transform((v) => (v === "" ? 0 : v)),
+  method: z.enum(PAY_METHODS),
+  due: z
+    .union([z.literal(""), z.string().regex(/^\d{4}-\d{2}-\d{2}$/)])
+    .transform((v) => v || undefined),
+  override: z
+    .string()
+    .optional()
+    .transform((v) => v === "on"),
+  reason: z
+    .string()
+    .trim()
+    .max(300)
+    .transform((v) => v || undefined),
+});
+
+export type CreditSaleInput = z.infer<typeof creditSaleSchema>;

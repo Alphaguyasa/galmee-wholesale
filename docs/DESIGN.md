@@ -2,6 +2,14 @@
 
 Change this file first, then the code.
 
+> Wholesale now uses the shared **Galmee design system**. Tokens live in
+> `src/app/globals.css` (only `--trade: #0f4c5c`, the tarp, is wholesale's;
+> `--tarp`, `--jerrycan`, `--paid` and `--late` remain as wholesale names
+> mapped onto the shared tokens), shared components in `src/components/galmee/`,
+> fonts in `src/app/fonts.ts`. The brief, the trade colour and the one bold
+> thing (the jerrycan band) below still hold; the colour and type tables below
+> are superseded by the shared tokens and type scale.
+
 ## Brief
 
 - **Subject:** a wholesale shop in Shashamane. Sugar and flour sacks stacked to the ceiling, yellow oil jerrycans, a blue tarpaulin over the delivery truck, and a credit notebook behind the counter that only the owner can read.

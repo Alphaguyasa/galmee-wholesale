@@ -1,5 +1,7 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { Plus, Search } from "lucide-react";
+import { Plus, Search, Users } from "lucide-react";
+import { EmptyState } from "@/components/galmee/empty-state";
+import { ListRow, ListSheet } from "@/components/galmee/list-row";
 import { OwedBar } from "@/components/owed-bar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -27,7 +29,7 @@ export default async function CustomersPage({ params, searchParams }: PageProps<
   return (
     <div>
       <section className="bg-jerrycan px-4 py-5 text-ink md:rounded-md">
-        <h1 className="text-base font-bold">{t("totalOwed")}</h1>
+        <h1 className="text-[1.5625rem] leading-tight font-bold">{t("totalOwed")}</h1>
         <p className="money mt-1 text-[2.5rem] leading-none break-words">{formatBirr(summary.totalOwed, locale)}</p>
         <p className="mt-2">{t("debtors", { count: summary.debtors })}</p>
       </section>
@@ -49,33 +51,42 @@ export default async function CustomersPage({ params, searchParams }: PageProps<
       </form>
 
       {customers.length === 0 ? (
-        <div className="grid justify-items-start gap-3 px-4 py-8 md:px-0">
-          <p>{query ? t("noMatch", { query }) : t("empty")}</p>
-          {query ? null : (
-            <Button asChild>
-              <Link href="/customers/new">{t("add")}</Link>
-            </Button>
-          )}
-        </div>
+        <EmptyState
+          icon={Users}
+          className="mx-4 mt-4 md:mx-0"
+          message={query ? t("noMatch", { query }) : t("empty")}
+          action={
+            query ? null : (
+              <Button asChild>
+                <Link href="/customers/new">{t("add")}</Link>
+              </Button>
+            )
+          }
+        />
       ) : (
-        <ul className="mt-2 divide-y divide-border">
+        <ListSheet className="mx-4 mt-4 md:mx-0">
           {customers.map((c) => (
-            <li key={c.id}>
-              <Link
-                href={`/customers/${c.id}`}
-                className="grid min-h-16 grid-cols-[minmax(0,1fr)_auto] items-baseline gap-x-3 px-4 py-3 hover:bg-accent md:px-2"
-              >
-                <span className="truncate font-bold">{c.name}</span>
-                <span className={`money whitespace-nowrap ${c.balance > 0 ? "text-owed" : ""}`}>{formatBirr(c.balance, locale)}</span>
-                <span className="truncate text-sm text-muted-foreground">
-                  {c.balance > 0 && c.daysOwing !== null ? t("sinceDays", { days: c.daysOwing }) : c.phone ?? t("settled")}
+            <ListRow
+              key={c.id}
+              href={`/${locale}/customers/${c.id}`}
+              className="hover:bg-band"
+              title={c.name}
+              sub={
+                <>
+                  <span className="truncate">
+                    {c.balance > 0 && c.daysOwing !== null ? t("sinceDays", { days: c.daysOwing }) : c.phone ?? t("settled")}
+                  </span>
+                  <OwedBar value={c.balance} max={biggest} className="mt-1.5" />
+                </>
+              }
+              right={
+                <span className={`money whitespace-nowrap ${c.balance > 0 ? "text-owed" : ""}`}>
+                  {formatBirr(c.balance, locale)}
                 </span>
-                <span />
-                <OwedBar value={c.balance} max={biggest} className="col-span-2 mt-2" />
-              </Link>
-            </li>
+              }
+            />
           ))}
-        </ul>
+        </ListSheet>
       )}
 
       <div className="fixed right-4 bottom-20 z-30 md:static md:mt-6 md:flex md:justify-end">

@@ -1,5 +1,23 @@
 # ROADMAP: Galmee Wholesale
 
+## M-next: Tier 1 close-out (receipts)
+
+- [ ] Receipt layout (58 mm, EN/AM) for credit sale
+- [ ] Receipt for repayment + reprint from statement
+- [ ] Telegram receipt via notifications queue
+
+## M-after: Tier 2 and 3
+
+- [ ] Weekly balance SMS: SQL generator that writes notifications rows (one scheduled query)
+- [ ] Simple stock: item qty in/out screens on core tables (RPC path)
+- [ ] Daily cash report screen
+- [ ] Offline queue for the credit sale + repayment with client_ref
+- [ ] Sync status indicator
+- [ ] Retail/wholesale dual price on item + per-customer flag
+- [ ] Evening owner Telegram summary
+- [ ] Staff invite + per-staff collections view
+- [ ] Excel import customers + opening balances; export everything
+
 ## M0: Foundation (shared pattern for all Galmee products)
 
 - [x] Next.js App Router + TS + Tailwind + shadcn/ui scaffold; `npm run build` passes
@@ -28,12 +46,9 @@
 - [x] Repayment entry using `record_repayment`
 - [x] Overdue list with ageing buckets 0-30 / 31-60 / 60+ days
 - [ ] Stock in/out and daily cash report
-- [ ] Migration: wh_price_lists
-- [ ] Migration: wh_price_list_items
-- [ ] Migration: wh_customer_groups
 - [x] Block a credit sale above the customer's `credit_limit` unless the owner overrides (log the override)
 - [x] Ageing buckets as a SQL view with security_invoker
-- [ ] Retail vs wholesale price per customer group
+- Retail vs wholesale price: simplified to a second price on each item plus a per-customer "wholesale price" flag (see M-after); full price-list and customer-group tables only if clients ask for more than two prices
 
 ## M3: Notifications
 

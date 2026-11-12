@@ -67,7 +67,8 @@
   "Common": {
     "skipToContent": "Gara qabiyyeetti darbi",
     "loadError": "Fuulli hin banamne. Interneetii keessan mirkaneessitanii irra deebiʼaa.",
-    "retry": "Irra deebiʼi"
+    "retry": "Irra deebiʼi",
+    "offline": "Interneetii hin qabdu. Lakkoofsonni mul'atan moofaa ta'uu danda'u; galmeen haaraan interneetii barbaada."
   },
   "Customers": {
     "totalOwed": "Liqaa walii galaa",

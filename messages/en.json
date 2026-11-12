@@ -67,7 +67,8 @@
   "Common": {
     "skipToContent": "Skip to content",
     "loadError": "This page could not load. Check your connection and try again.",
-    "retry": "Try again"
+    "retry": "Try again",
+    "offline": "You are offline. Figures shown may be out of date; new entries need a connection."
   },
   "Customers": {
     "totalOwed": "Total owed to you",

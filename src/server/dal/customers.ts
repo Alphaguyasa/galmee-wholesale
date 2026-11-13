@@ -1,4 +1,5 @@
 import "server-only";
+import { receiptRef } from "@/lib/receipt";
 import { createClient } from "@/lib/supabase/server";
 
 export type CustomerRowDTO = {
@@ -29,6 +30,8 @@ export type StatementRowDTO = {
   balanceAfter: number;
   at: string;
   note: string | null;
+  /** The sale or payment this row came from, for reprinting its receipt. */
+  receipt: { kind: "sale" | "payment"; id: string } | null;
 };
 
 const DAY_MS = 86_400_000;
@@ -150,7 +153,7 @@ export async function getStatement(customerId: string): Promise<StatementRowDTO[
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("wh_customer_statement")
-    .select("id, type, amount, balance_after, created_at, note")
+    .select("id, type, amount, balance_after, created_at, note, ref_table, ref_id")
     .eq("customer_id", customerId)
     .order("created_at", { ascending: false })
     .order("id", { ascending: false })
@@ -166,6 +169,12 @@ export async function getStatement(customerId: string): Promise<StatementRowDTO[
             balanceAfter: row.balance_after ?? 0,
             at: row.created_at,
             note: row.note,
+            receipt:
+              row.ref_id && row.ref_table === "sales"
+                ? { kind: "sale" as const, id: row.ref_id }
+                : row.ref_id && row.ref_table === "payments"
+                  ? { kind: "payment" as const, id: row.ref_id }
+                  : null,
           },
         ]
       : [],
@@ -178,13 +187,59 @@ export async function recordRepayment(input: {
   amount: number;
   method: "cash" | "telebirr" | "cbe_birr" | "bank" | "other";
   reference: string | undefined;
-}): Promise<{ ok: boolean }> {
+}): Promise<{ ok: true; paymentId: string } | { ok: false }> {
   const supabase = await createClient();
-  const { error } = await supabase.rpc("record_repayment", {
+  const { data, error } = await supabase.rpc("record_repayment", {
     p_customer: input.customer,
     p_amount: input.amount,
     p_method: input.method,
     p_reference: input.reference,
   });
-  return { ok: !error };
+  return !error && data ? { ok: true, paymentId: data } : { ok: false };
+}
+
+export type PaymentReceiptDTO = {
+  id: string;
+  ref: string;
+  customerId: string;
+  customerName: string;
+  amount: number;
+  method: string;
+  reference: string | null;
+  createdAt: string;
+  /** Balance right after this repayment (from the statement), null if the ledger row is missing. */
+  balanceAfter: number | null;
+};
+
+/** One repayment for its receipt. RLS hides other shops' payments; `customerId` must match. */
+export async function getPaymentReceipt(paymentId: string, customerId: string): Promise<PaymentReceiptDTO | null> {
+  const supabase = await createClient();
+  const { data: payment, error } = await supabase
+    .from("payments")
+    .select("id, customer_id, amount, method, reference, created_at, customers(name)")
+    .eq("id", paymentId)
+    .eq("customer_id", customerId)
+    .maybeSingle();
+  if (error) throw new Error("payment_load_failed");
+  if (!payment?.customer_id || !payment.customers) return null;
+
+  const { data: row, error: rowError } = await supabase
+    .from("wh_customer_statement")
+    .select("balance_after")
+    .eq("ref_table", "payments")
+    .eq("ref_id", payment.id)
+    .maybeSingle();
+  if (rowError) throw new Error("payment_load_failed");
+
+  return {
+    id: payment.id,
+    ref: receiptRef(payment.id),
+    customerId: payment.customer_id,
+    customerName: payment.customers.name,
+    amount: payment.amount,
+    method: payment.method,
+    reference: payment.reference,
+    createdAt: payment.created_at,
+    balanceAfter: row?.balance_after ?? null,
+  };
 }

@@ -3,7 +3,7 @@
 ## M-next: Tier 1 close-out (receipts)
 
 - [x] Receipt layout (58 mm, EN/AM) for credit sale
-- [ ] Receipt for repayment + reprint from statement
+- [x] Receipt for repayment + reprint from statement
 - [ ] Telegram receipt via notifications queue
 
 ## M-after: Tier 2 and 3

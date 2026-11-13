@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { ArrowDownLeft, ArrowUpRight, Check, Phone, TriangleAlert } from "lucide-react";
+import { ArrowDownLeft, ArrowUpRight, Check, Phone, Printer, TriangleAlert } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import type { AppLocale } from "@/i18n/routing";
@@ -15,9 +15,10 @@ export default async function CustomerPage({ params, searchParams }: PageProps<"
   const locale = rawLocale as AppLocale;
   if (!uuidParam.safeParse(id).success) notFound();
 
-  const [t, ts, customer, statement] = await Promise.all([
+  const [t, ts, tr, customer, statement] = await Promise.all([
     getTranslations("Customers"),
     getTranslations("Sales"),
+    getTranslations("Receipt"),
     getCustomer(id),
     getStatement(id),
   ]);
@@ -116,6 +117,15 @@ export default async function CustomerPage({ params, searchParams }: PageProps<"
                   {t("balanceAfter", { amount: formatBirr(row.balanceAfter, locale) })}
                 </span>
                 {row.note ? <span className="col-span-2 text-sm text-muted-foreground">{row.note}</span> : null}
+                {row.receipt ? (
+                  <Link
+                    href={`/customers/${customer.id}/${row.receipt.kind === "sale" ? "sales" : "payments"}/${row.receipt.id}`}
+                    className="col-span-2 inline-flex min-h-12 items-center gap-1.5 justify-self-start text-sm text-tarp underline underline-offset-4"
+                  >
+                    <Printer className="size-4" aria-hidden />
+                    {tr("reprint")}
+                  </Link>
+                ) : null}
               </li>
             ))}
           </ul>

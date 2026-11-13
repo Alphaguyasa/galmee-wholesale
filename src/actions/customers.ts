@@ -33,7 +33,7 @@ export async function addRepayment(_prev: FormState, formData: FormData): Promis
   if (!customer) return { error: "errorSave" };
   if (parsed.data.amount > customer.balance) return { error: "errorTooMuch" };
 
-  const { ok } = await recordRepayment(parsed.data);
-  if (!ok) return { error: "errorSave" };
-  return redirectTo(`/customers/${customer.id}?saved=1`);
+  const result = await recordRepayment(parsed.data);
+  if (!result.ok) return { error: "errorSave" };
+  return redirectTo(`/customers/${customer.id}/payments/${result.paymentId}?new=1`);
 }

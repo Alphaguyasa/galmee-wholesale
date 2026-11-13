@@ -206,6 +206,11 @@
     "footer": "Galatoomaa",
     "print": "Nagahee maxxansi",
     "saleSaved": "Gurgurtaan galmaa'eera. Maamilaaf nagahee maxxansi.",
-    "backToCustomer": "Gara {name} deebi'i"
+    "backToCustomer": "Gara {name} deebi'i",
+    "paymentTitle": "Nagahee kaffaltii liqii #{ref}",
+    "reference": "Wabii: {ref}",
+    "paymentSaved": "Kaffaltiin galmaa'eera. Maamilaaf nagahee maxxansi.",
+    "settled": "Liqiin guutummaan kaffalameera. Galatoomaa",
+    "reprint": "Nagahee"
   }
 }

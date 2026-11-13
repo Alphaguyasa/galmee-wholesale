@@ -206,6 +206,11 @@
     "footer": "እናመሰግናለን",
     "print": "ደረሰኝ አትም",
     "saleSaved": "ሽያጩ ተመዝግቧል። ለደንበኛው ደረሰኝ ያትሙ።",
-    "backToCustomer": "ወደ {name} ተመለስ"
+    "backToCustomer": "ወደ {name} ተመለስ",
+    "paymentTitle": "የዕዳ ክፍያ ደረሰኝ #{ref}",
+    "reference": "ማጣቀሻ፦ {ref}",
+    "paymentSaved": "ክፍያው ተመዝግቧል። ለደንበኛው ደረሰኝ ያትሙ።",
+    "settled": "ዕዳው ሙሉ በሙሉ ተከፍሏል። እናመሰግናለን",
+    "reprint": "ደረሰኝ"
   }
 }

@@ -2284,6 +2284,8 @@ export type Database = {
           due_date: string | null
           id: string | null
           note: string | null
+          ref_id: string | null
+          ref_table: string | null
           tenant_id: string | null
           type: string | null
         }

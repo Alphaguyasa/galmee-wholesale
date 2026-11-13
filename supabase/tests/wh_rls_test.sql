@@ -21,6 +21,7 @@ begin
     (ta, ca, 'debt', 50, now() - interval '40 days'),
     (ta, ca, 'debt', 30, now()),
     (ta, ca, 'repayment', 120, now());
+  update public.credit_ledger set ref_table = 'payments', ref_id = ua where customer_id = ca and type = 'repayment';
   insert into public.credit_ledger(tenant_id, customer_id, type, amount) values (tb, cb, 'debt', 999);
 
   perform set_config('request.jwt.claims', json_build_object('sub', ua, 'role','authenticated')::text, true);
@@ -43,6 +44,8 @@ begin
   select balance_after::int as b into a from public.wh_customer_statement
     where customer_id = ca order by created_at desc, id desc limit 1;
   r := r || 'last running balance=' || a.b || ' (expect 60); ';
+  select count(*) into n from public.wh_customer_statement where customer_id = ca and ref_table = 'payments' and ref_id = ua;
+  r := r || 'statement ref rows=' || n || ' (expect 1); ';
 
   perform set_config('request.jwt.claims', json_build_object('sub', ub, 'role','authenticated')::text, true);
   select * into s from public.wh_owed_summary();
@@ -54,6 +57,8 @@ begin
   r := r || 'anon ageing=' || n || ' (expect -1); ';
   begin select count(*) into n from public.wh_owed_summary(); exception when others then n := -1; end;
   r := r || 'anon summary=' || n || ' (expect -1); ';
+  begin select count(*) into n from public.wh_customer_statement; exception when others then n := -1; end;
+  r := r || 'anon statement=' || n || ' (expect -1); ';
 
   raise exception 'WH_RLS_RESULTS (rolled back): %', r;
 end $$;

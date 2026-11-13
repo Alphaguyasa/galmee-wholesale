@@ -206,6 +206,11 @@
     "footer": "Thank you",
     "print": "Print receipt",
     "saleSaved": "Sale recorded. Print the receipt for the customer.",
-    "backToCustomer": "Back to {name}"
+    "backToCustomer": "Back to {name}",
+    "paymentTitle": "Repayment receipt #{ref}",
+    "reference": "Reference: {ref}",
+    "paymentSaved": "Repayment recorded. Print the receipt for the customer.",
+    "settled": "Fully paid. Thank you",
+    "reprint": "Receipt"
   }
 }

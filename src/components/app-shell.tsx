@@ -43,7 +43,7 @@ export async function AppShell({ tenantName, logoUrl, userName, roleLabel, child
       >
         {tCommon("skipToContent")}
       </a>
-      <aside className="hidden border-r bg-card md:flex md:flex-col md:gap-6 md:p-4">
+      <aside className="hidden border-r print:!hidden bg-card md:flex md:flex-col md:gap-6 md:p-4">
         <TenantBadge tenantName={tenantName} logoUrl={logoUrl} />
         <AppNav variant="side" />
         <div className="mt-auto grid gap-3">
@@ -62,7 +62,7 @@ export async function AppShell({ tenantName, logoUrl, userName, roleLabel, child
       </aside>
 
       <div className="flex min-w-0 flex-col">
-        <header className="sticky top-0 z-30 flex h-16 items-center justify-between gap-2 bg-primary px-4 text-primary-foreground md:hidden">
+        <header className="print:hidden sticky top-0 z-30 flex h-16 items-center justify-between gap-2 bg-primary px-4 text-primary-foreground md:hidden">
           <TenantBadge tenantName={tenantName} logoUrl={logoUrl} inverse />
           <div className="flex items-center gap-1">
             <LanguageSwitcher inverse />
@@ -78,13 +78,17 @@ export async function AppShell({ tenantName, logoUrl, userName, roleLabel, child
             </form>
           </div>
         </header>
-        <OfflineBanner label={tCommon("offline")} />
-        <main id="main" className="mx-auto w-full max-w-4xl flex-1 pb-24 md:px-8 md:py-8">
+        <div className="print:hidden">
+          <OfflineBanner label={tCommon("offline")} />
+        </div>
+        <main id="main" className="mx-auto w-full max-w-4xl flex-1 pb-24 md:px-8 md:py-8 print:p-0">
           {children}
         </main>
       </div>
 
-      <AppNav variant="bottom" />
+      <div className="print:hidden">
+        <AppNav variant="bottom" />
+      </div>
     </div>
   );
 }

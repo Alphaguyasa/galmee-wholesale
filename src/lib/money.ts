@@ -8,6 +8,11 @@ export function formatBirr(amount: number, locale: AppLocale): string {
   return locale === "am" ? `ብር ${text}` : `${text} ETB`;
 }
 
+/** Amount without the currency, for narrow columns (receipt lines) where the currency is shown once below. */
+export function formatAmount(amount: number): string {
+  return NUMBER.format(amount);
+}
+
 const QTY = new Intl.NumberFormat("en-US", { maximumFractionDigits: 3 });
 
 /** Stock quantity for display: no trailing zeros, thousands separated. */

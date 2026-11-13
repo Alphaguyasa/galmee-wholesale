@@ -40,5 +40,5 @@ export async function giveOnCredit(_prev: SaleFormState, formData: FormData): Pr
       canOverride: result.reason === "over_limit" && session.profile.role === "owner",
     };
   }
-  return redirectTo(`/customers/${customer.id}?sold=1`);
+  return redirectTo(`/customers/${customer.id}/sales/${result.saleId}?new=1`);
 }

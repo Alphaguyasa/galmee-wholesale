@@ -17,3 +17,10 @@ describe("formatQty", () => {
     expect(formatQty(0)).toBe("0");
   });
 });
+
+describe("formatAmount", () => {
+  it("shows two decimals and no currency", async () => {
+    const { formatAmount } = await import("./money");
+    expect(formatAmount(3800)).toBe("3,800.00");
+  });
+});

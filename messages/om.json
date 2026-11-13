@@ -194,5 +194,18 @@
     "errorSave": "Gurgurtaan hin olkaa'amne. Irra deebi'ii yaali.",
     "saved": "Gurgurtaan galmaa'eera.",
     "give": "Liqiidhaan kenni"
+  },
+  "Receipt": {
+    "saleTitle": "Nagahee gurgurtaa liqii #{ref}",
+    "customer": "Maamila: {name}",
+    "total": "Waliigala",
+    "paid": "Kan kaffalame ({method})",
+    "onCredit": "Liqiidhaan",
+    "owedAfter": "Liqii amma",
+    "payBackBy": "Guyyaa deebisuu: {date}",
+    "footer": "Galatoomaa",
+    "print": "Nagahee maxxansi",
+    "saleSaved": "Gurgurtaan galmaa'eera. Maamilaaf nagahee maxxansi.",
+    "backToCustomer": "Gara {name} deebi'i"
   }
 }

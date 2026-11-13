@@ -194,5 +194,18 @@
     "errorSave": "ሽያጩ አልተቀመጠም። እንደገና ይሞክሩ።",
     "saved": "ሽያጩ ተመዝግቧል።",
     "give": "በዱቤ ስጥ"
+  },
+  "Receipt": {
+    "saleTitle": "የዱቤ ሽያጭ ደረሰኝ #{ref}",
+    "customer": "ደንበኛ፦ {name}",
+    "total": "ጠቅላላ",
+    "paid": "የተከፈለ ({method})",
+    "onCredit": "በዱቤ",
+    "owedAfter": "አሁን ያለበት",
+    "payBackBy": "የሚከፍልበት ቀን፦ {date}",
+    "footer": "እናመሰግናለን",
+    "print": "ደረሰኝ አትም",
+    "saleSaved": "ሽያጩ ተመዝግቧል። ለደንበኛው ደረሰኝ ያትሙ።",
+    "backToCustomer": "ወደ {name} ተመለስ"
   }
 }

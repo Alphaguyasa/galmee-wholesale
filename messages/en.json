@@ -194,5 +194,18 @@
     "errorSave": "The sale was not saved. Try again.",
     "saved": "Sale recorded.",
     "give": "Give on credit"
+  },
+  "Receipt": {
+    "saleTitle": "Credit sale receipt #{ref}",
+    "customer": "Customer: {name}",
+    "total": "Total",
+    "paid": "Paid ({method})",
+    "onCredit": "On credit",
+    "owedAfter": "Owes now",
+    "payBackBy": "Pay back by {date}",
+    "footer": "Thank you",
+    "print": "Print receipt",
+    "saleSaved": "Sale recorded. Print the receipt for the customer.",
+    "backToCustomer": "Back to {name}"
   }
 }

@@ -8,8 +8,10 @@ import { formToObject, itemSchema, receiveStockSchema } from "@/server/validatio
 import type { FormState } from "./auth";
 
 export async function addStock(_prev: FormState, formData: FormData): Promise<FormState> {
-  // Any active member of the shop may receive goods (RLS enforces the tenant).
-  await getSession();
+  // Receiving changes what the shop owns, so only the owner or a manager may do it
+  // (the database refuses staff too).
+  const session = await getSession();
+  if (session.profile.role === "staff") return { error: "errorReceiveRole" };
 
   const parsed = receiveStockSchema.safeParse(formToObject(formData, ["item", "qty", "cost", "batch"]));
   if (!parsed.success) {

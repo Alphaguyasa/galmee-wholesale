@@ -61,14 +61,16 @@ export default async function ItemsPage({ params, searchParams }: PageProps<"/[l
                   </span>
                   <span className="money truncate text-sm text-muted-foreground">{t("pricePer", { price: formatBirr(i.price, locale), unit: i.unit })}</span>
                 </div>
-                <Link
-                  href={`/items/${i.id}/receive`}
-                  aria-label={t("receiveFor", { name: i.name })}
-                  className="inline-flex min-h-12 items-center gap-2 rounded-md border border-input bg-card px-3 font-bold text-tarp hover:bg-accent"
-                >
-                  <PackagePlus className="size-5" aria-hidden />
-                  <span>{t("receiveShort")}</span>
-                </Link>
+                {canAdd ? (
+                  <Link
+                    href={`/items/${i.id}/receive`}
+                    aria-label={t("receiveFor", { name: i.name })}
+                    className="inline-flex min-h-12 items-center gap-2 rounded-md border border-input bg-card px-3 font-bold text-tarp hover:bg-accent"
+                  >
+                    <PackagePlus className="size-5" aria-hidden />
+                    <span>{t("receiveShort")}</span>
+                  </Link>
+                ) : null}
               </li>
             );
           })}

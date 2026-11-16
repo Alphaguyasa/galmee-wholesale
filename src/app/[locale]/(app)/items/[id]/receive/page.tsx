@@ -1,10 +1,11 @@
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ReceiveStockForm } from "@/components/receive-stock-form";
-import { Link } from "@/i18n/navigation";
+import { Link, redirect } from "@/i18n/navigation";
 import type { AppLocale } from "@/i18n/routing";
 import { formatQty } from "@/lib/money";
 import { getItem } from "@/server/dal/items";
+import { getSession } from "@/server/dal/session";
 import { uuidParam } from "@/server/validation";
 
 export default async function ReceivePage({ params }: PageProps<"/[locale]/items/[id]/receive">) {
@@ -13,8 +14,10 @@ export default async function ReceivePage({ params }: PageProps<"/[locale]/items
   const locale = rawLocale as AppLocale;
   if (!uuidParam.safeParse(id).success) notFound();
 
-  const [t, item] = await Promise.all([getTranslations("Items"), getItem(id, locale)]);
+  const [t, item, session] = await Promise.all([getTranslations("Items"), getItem(id, locale), getSession()]);
   if (!item) notFound();
+  // Only the owner or a manager receives goods; staff go back to the item list.
+  if (session.profile.role === "staff") redirect({ href: "/items", locale });
 
   return (
     <section className="grid max-w-md gap-4 p-4 md:p-0">

@@ -144,6 +144,7 @@
     "receive": "Save delivery",
     "errorQty": "Enter a quantity above zero.",
     "errorCost": "Enter the cost per unit (zero or more).",
+    "errorReceiveRole": "Only the owner or a manager can receive stock.",
     "errorSave": "The delivery was not saved. Try again.",
     "add": "Add item",
     "addTitle": "New item",

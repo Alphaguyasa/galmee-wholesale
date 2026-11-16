@@ -144,6 +144,7 @@
     "receive": "Galtee galmeessi",
     "errorQty": "Baay'ina zeeroo ol galchi.",
     "errorCost": "Gatii tokkoo galchi (zeeroo ykn isaa ol).",
+    "errorReceiveRole": "Meeshaa fudhachuu kan danda'an abbaa daldalaa ykn hoji-gaggeessaa qofa.",
     "errorSave": "Galteen hin galmoofne. Irra deebiʼaa yaalaa.",
     "add": "Meeshaa dabali",
     "addTitle": "Meeshaa haaraa",

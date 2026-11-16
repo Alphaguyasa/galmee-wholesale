@@ -9,8 +9,8 @@ import { formatBirr } from "@/lib/money";
 import { getCustomer, getStatement } from "@/server/dal/customers";
 import { uuidParam } from "@/server/validation";
 
-export default async function CustomerPage({ params, searchParams }: PageProps<"/[locale]/customers/[id]">) {
-  const [{ locale: rawLocale, id }, sp] = await Promise.all([params, searchParams]);
+export default async function CustomerPage({ params }: PageProps<"/[locale]/customers/[id]">) {
+  const { locale: rawLocale, id } = await params;
   setRequestLocale(rawLocale);
   const locale = rawLocale as AppLocale;
   if (!uuidParam.safeParse(id).success) notFound();
@@ -69,20 +69,6 @@ export default async function CustomerPage({ params, searchParams }: PageProps<"
         <p role="status" className="mx-4 mt-3 flex items-start gap-2 rounded-md border border-owed p-3 text-owed md:mx-0">
           <TriangleAlert className="mt-0.5 size-5 shrink-0" aria-hidden />
           {t("overLimit")}
-        </p>
-      ) : null}
-
-      {sp.saved === "1" ? (
-        <p role="status" className="mx-4 mt-3 flex items-center gap-2 rounded-md border border-paid p-3 text-paid md:mx-0">
-          <Check className="size-5 shrink-0" aria-hidden />
-          {t("repaymentSaved")}
-        </p>
-      ) : null}
-
-      {sp.sold === "1" ? (
-        <p role="status" className="mx-4 mt-3 flex items-center gap-2 rounded-md border border-paid p-3 text-paid md:mx-0">
-          <Check className="size-5 shrink-0" aria-hidden />
-          {ts("saved")}
         </p>
       ) : null}
 

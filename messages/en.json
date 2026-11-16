@@ -107,7 +107,6 @@
     "methodOther": "Other",
     "reference": "Reference (optional)",
     "referenceHint": "Transaction number or a short note.",
-    "repaymentSaved": "Repayment recorded.",
     "statement": "Statement",
     "statementEmpty": "No debts or repayments yet.",
     "debt": "Gave on credit",
@@ -213,7 +212,6 @@
     "errorPaidTooMuch": "The amount paid is more than the total.",
     "errorItem": "One of the items is no longer available. Reload the page.",
     "errorSave": "The sale was not saved. Try again.",
-    "saved": "Sale recorded.",
     "give": "Give on credit"
   },
   "Receipt": {

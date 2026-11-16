@@ -107,7 +107,6 @@
     "methodOther": "ሌላ",
     "reference": "ማጣቀሻ (ካለ)",
     "referenceHint": "የግብይት ቁጥር ወይም አጭር ማስታወሻ።",
-    "repaymentSaved": "ክፍያው ተመዝግቧል።",
     "statement": "የሒሳብ መግለጫ",
     "statementEmpty": "እስካሁን ዕዳ ወይም ክፍያ የለም።",
     "debt": "በዱቤ ተሰጥቷል",
@@ -213,7 +212,6 @@
     "errorPaidTooMuch": "የተከፈለው ከጠቅላላው ይበልጣል።",
     "errorItem": "አንዱ እቃ ከአሁን በኋላ የለም። ገጹን እንደገና ይጫኑ።",
     "errorSave": "ሽያጩ አልተቀመጠም። እንደገና ይሞክሩ።",
-    "saved": "ሽያጩ ተመዝግቧል።",
     "give": "በዱቤ ስጥ"
   },
   "Receipt": {

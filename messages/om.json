@@ -107,7 +107,6 @@
     "methodOther": "Kan biraa",
     "reference": "Wabii (yoo jiraate)",
     "referenceHint": "Lakkoofsa daddabarsaa ykn yaadannoo gabaabaa.",
-    "repaymentSaved": "Kaffaltiin galmaaʼeera.",
     "statement": "Ibsa herregaa",
     "statementEmpty": "Ammaaf liqaan ykn kaffaltiin hin jiru.",
     "debt": "Liqiidhaan kenname",
@@ -213,7 +212,6 @@
     "errorPaidTooMuch": "Hanga kaffalame waliigala caala.",
     "errorItem": "Meeshaan tokko amma hin jiru. Fuula irra deebi'ii fe'i.",
     "errorSave": "Gurgurtaan hin olkaa'amne. Irra deebi'ii yaali.",
-    "saved": "Gurgurtaan galmaa'eera.",
     "give": "Liqiidhaan kenni"
   },
   "Receipt": {

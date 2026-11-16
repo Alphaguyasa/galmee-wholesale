@@ -161,7 +161,26 @@
     "errorRole": "Only the owner or a manager can add items.",
     "errorUnit": "Enter a unit, for example bag.",
     "errorNumber": "Prices and the warning level must be numbers, zero or more.",
-    "errorItemName": "Enter the English name (at least 2 letters)."
+    "errorItemName": "Enter the English name (at least 2 letters).",
+    "outShort": "Take out",
+    "outFor": "Take {name} out of stock",
+    "outTitle": "Take {name} out of stock",
+    "outIntro": "For goods that left without a sale. The oldest delivery is used first.",
+    "outQty": "Quantity to take out ({unit})",
+    "outReason": "Why",
+    "reasons": {
+      "damaged": "Damaged or spoiled",
+      "expired": "Expired",
+      "own_use": "Used by the shop or family",
+      "returned": "Returned to the supplier",
+      "count": "Counted less than the book"
+    },
+    "out": "Take out of stock",
+    "removed": "Saved. {name}: {qty} {unit} on hand now.",
+    "errorOutRole": "Only the owner or a manager can take stock out.",
+    "errorOutReason": "Choose why the goods are leaving.",
+    "errorOutTooMany": "That is more than you have on hand.",
+    "errorOutSave": "Nothing was taken out. Try again."
   },
   "Sales": {
     "title": "Give on credit to {name}",

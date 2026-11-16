@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { creditSaleSchema } from "./validation";
+import { creditSaleSchema, stockOutSchema } from "./validation";
 
 const base = {
   customer: "6f1c2d3e-4b5a-4c6d-8e7f-901234567890",
@@ -35,5 +35,19 @@ describe("creditSaleSchema", () => {
   it("rejects a negative payment and an unknown method", () => {
     expect(creditSaleSchema.safeParse({ ...base, paid: "-5" }).success).toBe(false);
     expect(creditSaleSchema.safeParse({ ...base, method: "chapa" }).success).toBe(false);
+  });
+});
+
+describe("stockOutSchema", () => {
+  const item = "3f2b8c1e-7a4d-4e2b-9c1a-2b3c4d5e6f70";
+  it("accepts a positive quantity and a known reason", () => {
+    expect(stockOutSchema.safeParse({ item, qty: "2.5", reason: "damaged" }).success).toBe(true);
+  });
+  it("refuses zero, negative, over-precise or unknown input", () => {
+    expect(stockOutSchema.safeParse({ item, qty: "0", reason: "damaged" }).success).toBe(false);
+    expect(stockOutSchema.safeParse({ item, qty: "-3", reason: "damaged" }).success).toBe(false);
+    expect(stockOutSchema.safeParse({ item, qty: "1.0001", reason: "damaged" }).success).toBe(false);
+    expect(stockOutSchema.safeParse({ item, qty: "1", reason: "gift" }).success).toBe(false);
+    expect(stockOutSchema.safeParse({ item: "x", qty: "1", reason: "count" }).success).toBe(false);
   });
 });

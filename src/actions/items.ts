@@ -2,9 +2,9 @@
 
 import { getLocale } from "next-intl/server";
 import type { AppLocale } from "@/i18n/routing";
-import { addItem, getItem, receiveStock } from "@/server/dal/items";
+import { addItem, getItem, receiveStock, stockOut } from "@/server/dal/items";
 import { getSession, redirectTo } from "@/server/dal/session";
-import { formToObject, itemSchema, receiveStockSchema } from "@/server/validation";
+import { formToObject, itemSchema, receiveStockSchema, stockOutSchema } from "@/server/validation";
 import type { FormState } from "./auth";
 
 export async function addStock(_prev: FormState, formData: FormData): Promise<FormState> {
@@ -25,6 +25,23 @@ export async function addStock(_prev: FormState, formData: FormData): Promise<Fo
   const { ok } = await receiveStock(parsed.data);
   if (!ok) return { error: "errorSave" };
   return redirectTo(`/items?received=${item.id}`);
+}
+
+export async function removeStock(_prev: FormState, formData: FormData): Promise<FormState> {
+  // Taking goods off the books is the owner's or a manager's call (the database refuses staff too).
+  const session = await getSession();
+  if (session.profile.role === "staff") return { error: "errorOutRole" };
+
+  const parsed = stockOutSchema.safeParse(formToObject(formData, ["item", "qty", "reason"]));
+  if (!parsed.success) return { error: parsed.error.issues[0]?.path[0] === "reason" ? "errorOutReason" : "errorQty" };
+
+  const result = await stockOut(parsed.data);
+  if (!result.ok) {
+    if (result.reason === "no_stock") return { error: "errorOutTooMany" };
+    if (result.reason === "not_allowed") return { error: "errorOutRole" };
+    return { error: "errorOutSave" };
+  }
+  return redirectTo(`/items?removed=${parsed.data.item}`);
 }
 
 const ITEM_FIELDS = ["nameEn", "nameAm", "nameOm", "unit", "price", "cost", "reorderLevel"] as const;

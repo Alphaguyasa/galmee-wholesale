@@ -1,5 +1,5 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { PackagePlus, Plus, Search } from "lucide-react";
+import { PackageMinus, PackagePlus, Plus, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Link } from "@/i18n/navigation";
@@ -17,11 +17,13 @@ export default async function ItemsPage({ params, searchParams }: PageProps<"/[l
   const parsed = searchParam.safeParse(typeof sp.q === "string" ? sp.q : "");
   const query = parsed.success ? parsed.data : "";
   const receivedId = uuidParam.safeParse(sp.received);
+  const removedId = uuidParam.safeParse(sp.removed);
 
   const [t, items, session] = await Promise.all([getTranslations("Items"), listItems(query, locale), getSession()]);
   const canAdd = session.profile.role !== "staff";
   const low = items.filter((i) => i.onHand <= i.reorderLevel).length;
   const received = receivedId.success ? items.find((i) => i.id === receivedId.data) : undefined;
+  const removed = removedId.success ? items.find((i) => i.id === removedId.data) : undefined;
 
   return (
     <div>
@@ -34,6 +36,11 @@ export default async function ItemsPage({ params, searchParams }: PageProps<"/[l
       {received ? (
         <p role="status" className="mx-4 mt-4 rounded-md border border-tarp bg-card px-3 py-2 md:mx-0">
           {t("received", { name: received.name, qty: formatQty(received.onHand), unit: received.unit })}
+        </p>
+      ) : null}
+      {removed ? (
+        <p role="status" className="mx-4 mt-4 rounded-md border border-tarp bg-card px-3 py-2 md:mx-0">
+          {t("removed", { name: removed.name, qty: formatQty(removed.onHand), unit: removed.unit })}
         </p>
       ) : null}
 
@@ -62,14 +69,26 @@ export default async function ItemsPage({ params, searchParams }: PageProps<"/[l
                   <span className="money truncate text-sm text-muted-foreground">{t("pricePer", { price: formatBirr(i.price, locale), unit: i.unit })}</span>
                 </div>
                 {canAdd ? (
-                  <Link
-                    href={`/items/${i.id}/receive`}
-                    aria-label={t("receiveFor", { name: i.name })}
-                    className="inline-flex min-h-12 items-center gap-2 rounded-md border border-input bg-card px-3 font-bold text-tarp hover:bg-accent"
-                  >
-                    <PackagePlus className="size-5" aria-hidden />
-                    <span>{t("receiveShort")}</span>
-                  </Link>
+                  <div className="flex gap-2">
+                    {i.onHand > 0 ? (
+                      <Link
+                        href={`/items/${i.id}/remove`}
+                        aria-label={t("outFor", { name: i.name })}
+                        title={t("outShort")}
+                        className="inline-flex size-12 items-center justify-center rounded-md border border-input bg-card text-muted-foreground hover:bg-accent"
+                      >
+                        <PackageMinus className="size-5" aria-hidden />
+                      </Link>
+                    ) : null}
+                    <Link
+                      href={`/items/${i.id}/receive`}
+                      aria-label={t("receiveFor", { name: i.name })}
+                      className="inline-flex min-h-12 items-center gap-2 rounded-md border border-input bg-card px-3 font-bold text-tarp hover:bg-accent"
+                    >
+                      <PackagePlus className="size-5" aria-hidden />
+                      <span>{t("receiveShort")}</span>
+                    </Link>
+                  </div>
                 ) : null}
               </li>
             );

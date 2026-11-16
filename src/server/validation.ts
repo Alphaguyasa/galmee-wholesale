@@ -57,6 +57,19 @@ export function formToObject(formData: FormData, keys: readonly string[]) {
   return Object.fromEntries(keys.map((k) => [k, formData.get(k) ?? ""]));
 }
 
+/** Why goods leave the shelf without a sale; the database accepts exactly these. */
+export const STOCK_OUT_REASONS = ["damaged", "expired", "own_use", "returned", "count"] as const;
+
+export const stockOutSchema = z.object({
+  item: uuidParam,
+  qty: z.coerce
+    .number()
+    .positive()
+    .max(10_000_000)
+    .refine((n) => Math.round(n * 1000) === n * 1000),
+  reason: z.enum(STOCK_OUT_REASONS),
+});
+
 export const receiveStockSchema = z.object({
   item: uuidParam,
   qty: z.coerce.number().positive().max(10_000_000),

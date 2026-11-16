@@ -2632,11 +2632,11 @@ export type Database = {
           p_paid?: number
           p_reason?: string
         }
+        Returns: string
+      }
       wh_stock_out: {
         Args: { p_item: string; p_qty: number; p_reason: string }
         Returns: number
-      }
-        Returns: string
       }
     }
     Enums: {

@@ -90,6 +90,20 @@ export async function receiveStock(input: { item: string; qty: number; cost: num
   return { ok: !error };
 }
 
+export type StockOutResult = { ok: true; left: number } | { ok: false; reason: "no_stock" | "not_allowed" | "failed" };
+
+/** Takes goods off the shelf through wh_stock_out (owner or manager; oldest batch first). */
+export async function stockOut(input: { item: string; qty: number; reason: string }): Promise<StockOutResult> {
+  const supabase = await createClient();
+  const { data, error } = await supabase.rpc("wh_stock_out", { p_item: input.item, p_qty: input.qty, p_reason: input.reason });
+  if (error) {
+    if (error.message.includes("insufficient_stock")) return { ok: false, reason: "no_stock" };
+    if (error.message.includes("not_allowed")) return { ok: false, reason: "not_allowed" };
+    return { ok: false, reason: "failed" };
+  }
+  return { ok: true, left: Number(data) };
+}
+
 export async function addItem(input: {
   nameEn: string;
   nameAm: string | null;

@@ -9,7 +9,7 @@
 ## M-after: Tier 2 and 3
 
 - [ ] Weekly balance SMS: SQL generator that writes notifications rows (one scheduled query)
-- [ ] Simple stock: item qty in/out screens on core tables (RPC path)
+- [x] Simple stock: item qty in/out screens on core tables (RPC path)
 - [x] Daily cash report screen
 - [ ] Offline queue for the credit sale + repayment with client_ref
 - [ ] Sync status indicator
@@ -45,7 +45,7 @@
 - [x] Quick 'give on credit' sale using `record_sale` with paid < total
 - [x] Repayment entry using `record_repayment`
 - [x] Overdue list with ageing buckets 0-30 / 31-60 / 60+ days
-- [ ] Stock in/out and daily cash report
+- [x] Stock in/out and daily cash report
 - [x] Block a credit sale above the customer's `credit_limit` unless the owner overrides (log the override)
 - [x] Ageing buckets as a SQL view with security_invoker
 - Retail vs wholesale price: simplified to a second price on each item plus a per-customer "wholesale price" flag (see M-after); full price-list and customer-group tables only if clients ask for more than two prices

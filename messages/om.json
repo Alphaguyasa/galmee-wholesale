@@ -161,7 +161,26 @@
     "errorRole": "Meeshaa dabaluu kan danda'an abbaa daldalaa ykn hoji-gaggeessaa qofa.",
     "errorUnit": "Safartuu galchi, fakkeenyaaf kuntaala.",
     "errorNumber": "Gatiiwwanii fi sadarkaan akeekkachiisaa lakkoofsa zeeroo ykn isaa ol ta'uu qabu.",
-    "errorItemName": "Maqaa Ingiliziitiin galchi (yoo xiqqaate qubee 2)."
+    "errorItemName": "Maqaa Ingiliziitiin galchi (yoo xiqqaate qubee 2).",
+    "outShort": "Baasi",
+    "outFor": "{name} kuusaa keessaa baasi",
+    "outTitle": "{name} kuusaa keessaa baasi",
+    "outIntro": "Meeshaa gurgurtaa malee bahe. Kan duraan gale dursa.",
+    "outQty": "Baay'ina bahu ({unit})",
+    "outReason": "Sababa",
+    "reasons": {
+      "damaged": "Kan miidhame",
+      "expired": "Yeroon isaa kan darbe",
+      "own_use": "Suuqii ykn maatiidhaaf kan oole",
+      "returned": "Dhiyeessaatti kan deebi'e",
+      "count": "Lakkoofsi galmee irra xiqqaa"
+    },
+    "out": "Kuusaa keessaa baasi",
+    "removed": "Kuufameera. {name}: amma {qty} {unit} jira.",
+    "errorOutRole": "Kuusaa baasuu kan danda'an abbaa qabeenyaa ykn hoogganaa qofa.",
+    "errorOutReason": "Sababa meeshaan itti bahu filadhu.",
+    "errorOutTooMany": "Kun kan harka jiru caala.",
+    "errorOutSave": "Homtuu hin baane. Irra deebi'ii yaali."
   },
   "Sales": {
     "title": "Liqiidhaan {name}f kenni",

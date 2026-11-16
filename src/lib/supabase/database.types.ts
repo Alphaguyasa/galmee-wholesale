@@ -2609,6 +2609,18 @@ export type Database = {
           total_owed: number
         }[]
       }
+      wh_daily_cash: {
+        Args: { p_day?: string }
+        Returns: {
+          credit_given: number
+          method: string
+          repayment_count: number
+          repayments: number
+          sales_collected: number
+          sales_count: number
+          sales_total: number
+        }[]
+      }
       wh_record_credit_sale: {
         Args: {
           p_client_ref?: string

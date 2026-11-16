@@ -57,7 +57,8 @@
     "menu": "Main menu",
     "customers": "Who owes",
     "overdue": "Overdue",
-    "items": "Stock"
+    "items": "Stock",
+    "cash": "Cash"
   },
   "Roles": {
     "owner": "Owner",
@@ -213,5 +214,33 @@
     "paymentSaved": "Repayment recorded. Print the receipt for the customer.",
     "settled": "Fully paid. Thank you",
     "reprint": "Receipt"
+  },
+  "Cash": {
+    "title": "Daily cash",
+    "today": "Today",
+    "dayLabel": "Day",
+    "previousDay": "Previous day",
+    "nextDay": "Next day",
+    "show": "Show this day",
+    "cashIn": "Cash in the drawer",
+    "totalIn": "All money in: {amount}",
+    "salesCount": "{count, plural, =0 {No sales} =1 {1 sale} other {# sales}}",
+    "creditGiven": "Given on credit",
+    "creditSub": "{count, plural, =0 {No credit sales} =1 {1 sale on credit} other {# sales on credit}}",
+    "repaid": "Paid back by shops",
+    "repaidSub": "{count, plural, =0 {No repayments} =1 {1 repayment} other {# repayments}}",
+    "byMethod": "By payment method",
+    "methodLine": "Counter {sales} · Paid back {repaid}",
+    "creditLine": "Sales worth {total}",
+    "empty": "No sales or repayments on this day.",
+    "methods": {
+      "cash": "Cash",
+      "telebirr": "Telebirr",
+      "cbe_birr": "CBE Birr",
+      "bank": "Bank transfer",
+      "chapa": "Chapa",
+      "other": "Other",
+      "credit": "On credit"
+    }
   }
 }

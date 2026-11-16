@@ -10,7 +10,7 @@
 
 - [ ] Weekly balance SMS: SQL generator that writes notifications rows (one scheduled query)
 - [ ] Simple stock: item qty in/out screens on core tables (RPC path)
-- [ ] Daily cash report screen
+- [x] Daily cash report screen
 - [ ] Offline queue for the credit sale + repayment with client_ref
 - [ ] Sync status indicator
 - [ ] Retail/wholesale dual price on item + per-customer flag

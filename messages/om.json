@@ -57,7 +57,8 @@
     "menu": "Baafata guddaa",
     "customers": "Liqaaffattoota",
     "overdue": "Yeroon darbe",
-    "items": "Meeshaa"
+    "items": "Meeshaa",
+    "cash": "Maallaqa"
   },
   "Roles": {
     "owner": "Abbaa qabeenyaa",
@@ -213,5 +214,33 @@
     "paymentSaved": "Kaffaltiin galmaa'eera. Maamilaaf nagahee maxxansi.",
     "settled": "Liqiin guutummaan kaffalameera. Galatoomaa",
     "reprint": "Nagahee"
+  },
+  "Cash": {
+    "title": "Maallaqa guyyaa",
+    "today": "Har'a",
+    "dayLabel": "Guyyaa",
+    "previousDay": "Guyyaa darbe",
+    "nextDay": "Guyyaa itti aanu",
+    "show": "Guyyaa kana agarsiisi",
+    "cashIn": "Maallaqa callaa sanduuqa keessa",
+    "totalIn": "Maallaqa seene hunda: {amount}",
+    "salesCount": "{count, plural, =0 {Gurgurtaan hin jiru} =1 {Gurgurtaa 1} other {Gurgurtaa #}}",
+    "creditGiven": "Liqaan kenname",
+    "creditSub": "{count, plural, =0 {Gurgurtaan liqaa hin jiru} =1 {Gurgurtaa liqaa 1} other {Gurgurtaa liqaa #}}",
+    "repaid": "Kan suuqonni deebisan",
+    "repaidSub": "{count, plural, =0 {Kaffaltiin hin jiru} =1 {Kaffaltii 1} other {Kaffaltii #}}",
+    "byMethod": "Karaa kaffaltiitiin",
+    "methodLine": "Gurgurtaa {sales} · Deebi'e {repaid}",
+    "creditLine": "Gurgurtaa {total}",
+    "empty": "Guyyaa kana gurgurtaanis kaffaltiinis hin jiru.",
+    "methods": {
+      "cash": "Maallaqa callaa",
+      "telebirr": "Telebirr",
+      "cbe_birr": "CBE Birr",
+      "bank": "Baankii",
+      "chapa": "Chapa",
+      "other": "Kan biraa",
+      "credit": "Liqaan"
+    }
   }
 }

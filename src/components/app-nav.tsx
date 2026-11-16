@@ -1,17 +1,18 @@
 "use client";
 
 import { useLocale, useTranslations } from "next-intl";
-import { Boxes, CalendarClock, ListOrdered } from "lucide-react";
+import { Boxes, CalendarClock, ListOrdered, Wallet } from "lucide-react";
 import { BottomNav } from "@/components/galmee/bottom-nav";
 
 const ITEMS = [
   { href: "/customers", key: "customers", icon: ListOrdered },
   { href: "/overdue", key: "overdue", icon: CalendarClock },
+  { href: "/cash", key: "cash", icon: Wallet },
   { href: "/items", key: "items", icon: Boxes },
 ] as const;
 
 /**
- * Wholesale's three destinations in the shared Galmee nav. Routes carry the
+ * Wholesale's four destinations in the shared Galmee nav. Routes carry the
  * language prefix (/am, /om, /en), so the hrefs include it: the links stay in
  * the chosen language and the active tab matches the full path.
  */

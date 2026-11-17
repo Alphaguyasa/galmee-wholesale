@@ -259,5 +259,34 @@
       "other": "Other",
       "credit": "On credit"
     }
+  },
+  "Export": {
+    "title": "Download your records",
+    "intro": "Your whole book as spreadsheet files (CSV) that open in Excel or Google Sheets. Keep a copy on your computer or give it to your accountant.",
+    "hint": "Each file has every row from the first day. Dates are in Gregorian and Ethiopian.",
+    "notAllowed": "Only the owner or a manager can download the records.",
+    "link": "Download your records",
+    "kinds": {
+      "customers": {
+        "title": "Customers and what they owe",
+        "sub": "Name, phone, credit limit, amount owed, owing since"
+      },
+      "ledger": {
+        "title": "Credit book",
+        "sub": "Every debt and repayment, shop by shop"
+      },
+      "payments": {
+        "title": "Money received",
+        "sub": "Every payment with method and reference"
+      },
+      "sales": {
+        "title": "Sales",
+        "sub": "Every sale with total, paid and on credit"
+      },
+      "items": {
+        "title": "Items and stock",
+        "sub": "Prices, cost and quantity on hand"
+      }
+    }
   }
 }

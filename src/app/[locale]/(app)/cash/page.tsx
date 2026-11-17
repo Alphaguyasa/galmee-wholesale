@@ -1,5 +1,5 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { CalendarDays, ChevronLeft, ChevronRight } from "lucide-react";
+import { CalendarDays, ChevronLeft, ChevronRight, Download } from "lucide-react";
 import { EmptyState } from "@/components/galmee/empty-state";
 import { ListRow, ListSheet } from "@/components/galmee/list-row";
 import { MoneySummaryCard } from "@/components/galmee/money-summary-card";
@@ -12,6 +12,7 @@ import { formatEthiopianDate } from "@/lib/ethiopian-calendar";
 import { formatBirr } from "@/lib/money";
 import { cn } from "@/lib/utils";
 import { getDailyCash } from "@/server/dal/reports";
+import { getSession } from "@/server/dal/session";
 
 // Cash and Telebirr are always listed (the owner looks for them); the rest only when used that day.
 const ALWAYS_SHOWN = new Set(["cash", "telebirr"]);
@@ -23,7 +24,13 @@ export default async function DailyCashPage({ params, searchParams }: PageProps<
 
   const today = addisToday();
   const day = typeof sp.day === "string" && isIsoDay(sp.day) && sp.day <= today ? sp.day : today;
-  const [t, report] = await Promise.all([getTranslations("Cash"), getDailyCash(day)]);
+  const [t, te, report, session] = await Promise.all([
+    getTranslations("Cash"),
+    getTranslations("Export"),
+    getDailyCash(day),
+    getSession(),
+  ]);
+  const canExport = session.profile.role === "owner" || session.profile.role === "manager";
 
   const isToday = day === today;
   const credit = report.rows.find((r) => r.method === "credit");
@@ -135,6 +142,13 @@ export default async function DailyCashPage({ params, searchParams }: PageProps<
           </ListSheet>
         </section>
       )}
+
+      {canExport ? (
+        <Link href="/export" className="inline-flex min-h-12 items-center gap-2 justify-self-start text-tarp underline underline-offset-4">
+          <Download className="size-4" aria-hidden />
+          {te("link")}
+        </Link>
+      ) : null}
     </div>
   );
 }

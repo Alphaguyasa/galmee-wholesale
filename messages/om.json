@@ -259,5 +259,34 @@
       "other": "Kan biraa",
       "credit": "Liqaan"
     }
+  },
+  "Export": {
+    "title": "Galmee kee buusi",
+    "intro": "Galmeen kee guutuun faayilii (CSV) Excel ykn Google Sheets keessatti banamuun. Koppii kompiitara kee irratti kaa'i ykn herregaa keetiif kenni.",
+    "hint": "Faayiliin tokko tokkoon guyyaa jalqabaa irraa kaasee sarara hunda qaba. Guyyoonni Faranjii fi Itoophiyaan barreeffamaniiru.",
+    "notAllowed": "Galmee buusuu kan danda'u abbaa qabeenyaa ykn hoggantaa qofa.",
+    "link": "Galmee kee buusi",
+    "kinds": {
+      "customers": {
+        "title": "Maamiltootaa fi liqii isaanii",
+        "sub": "Maqaa, bilbila, daangaa liqii, liqii qaban, eegasii"
+      },
+      "ledger": {
+        "title": "Galmee liqii",
+        "sub": "Liqii fi kaffaltii hunda, suuqii suuqiin"
+      },
+      "payments": {
+        "title": "Maallaqa argame",
+        "sub": "Kaffaltii hunda mala fi wabii waliin"
+      },
+      "sales": {
+        "title": "Gurgurtaa",
+        "sub": "Gurgurtaa hunda waliigala, kaffalame fi liqii waliin"
+      },
+      "items": {
+        "title": "Meeshaalee fi kuusaa",
+        "sub": "Gatii, gatii bittaa fi baay'ina jiru"
+      }
+    }
   }
 }

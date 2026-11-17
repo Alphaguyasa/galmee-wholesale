@@ -16,7 +16,7 @@
 - [ ] Retail/wholesale dual price on item + per-customer flag
 - [ ] Evening owner Telegram summary
 - [ ] Staff invite + per-staff collections view
-- [ ] Excel import customers + opening balances; export everything
+- [ ] Excel import customers + opening balances (export everything: done)
 
 ## M0: Foundation (shared pattern for all Galmee products)
 
@@ -67,9 +67,9 @@
 
 - [ ] Receipt printing (58/80 mm thermal) and Telegram receipt
 - [ ] Data import from Excel/CSV
-- [ ] Export all tenant data to Excel
+- [x] Export all tenant data to Excel (CSV for Excel: customers, credit book, payments, sales, items)
 - [ ] Error monitoring hook (Sentry, DSN via env)
-- [ ] README: setup, env vars, deploy steps
+- [x] README: setup, env vars, deploy steps
 
 ## Q: Quality and security baseline (do these inside M0 and M1, not after)
 

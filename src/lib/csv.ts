@@ -42,3 +42,8 @@ export function isExportKind(value: string): value is ExportKind {
 export function exportFileName(kind: ExportKind, day: string): string {
   return `galmee-wholesale-${kind}-${day}.csv`;
 }
+
+/** File name for one shop's statement, e.g. galmee-wholesale-statement-3f2a9c01-2026-11-17.csv. */
+export function statementFileName(customerId: string, day: string): string {
+  return `galmee-wholesale-statement-${customerId.replace(/[^0-9a-f]/gi, "").slice(0, 8).toLowerCase()}-${day}.csv`;
+}

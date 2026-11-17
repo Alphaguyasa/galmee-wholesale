@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { ArrowDownLeft, ArrowUpRight, Check, Phone, Printer, TriangleAlert } from "lucide-react";
+import { ArrowDownLeft, ArrowUpRight, Check, Download, Phone, Printer, TriangleAlert } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import type { AppLocale } from "@/i18n/routing";
@@ -84,7 +84,19 @@ export default async function CustomerPage({ params }: PageProps<"/[locale]/cust
       </div>
 
       <section className="mt-6">
-        <h2 className="px-4 text-lg font-bold md:px-0">{t("statement")}</h2>
+        <div className="flex flex-wrap items-center justify-between gap-x-4 px-4 md:px-0">
+          <h2 className="text-lg font-bold">{t("statement")}</h2>
+          {statement.length > 0 ? (
+            <a
+              href={`/api/export/statement/${customer.id}`}
+              download
+              className="inline-flex min-h-12 items-center gap-1.5 text-sm text-tarp underline underline-offset-4"
+            >
+              <Download className="size-4" aria-hidden />
+              {t("downloadStatement")}
+            </a>
+          ) : null}
+        </div>
         {statement.length === 0 ? (
           <p className="px-4 py-4 md:px-0">{t("statementEmpty")}</p>
         ) : (

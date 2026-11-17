@@ -113,7 +113,8 @@
     "repayment": "Repaid",
     "balanceAfter": "Balance {amount}",
     "errorAmount": "Enter the amount as a number above 0, and choose how it was paid.",
-    "errorTooMuch": "That is more than this customer owes. Check the amount."
+    "errorTooMuch": "That is more than this customer owes. Check the amount.",
+    "downloadStatement": "Download full statement"
   },
   "Overdue": {
     "title": "Overdue by age",

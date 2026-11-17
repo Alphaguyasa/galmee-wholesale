@@ -113,7 +113,8 @@
     "repayment": "ተከፍሏል",
     "balanceAfter": "ቀሪ {amount}",
     "errorAmount": "መጠኑን ከ0 በላይ በቁጥር ያስገቡ፣ የክፍያ መንገዱንም ይምረጡ።",
-    "errorTooMuch": "መጠኑ ደንበኛው ካለበት ዕዳ ይበልጣል። አረጋግጠው ያስገቡ።"
+    "errorTooMuch": "መጠኑ ደንበኛው ካለበት ዕዳ ይበልጣል። አረጋግጠው ያስገቡ።",
+    "downloadStatement": "ሙሉ መግለጫውን ያውርዱ"
   },
   "Overdue": {
     "title": "ዕዳ በቆይታ",

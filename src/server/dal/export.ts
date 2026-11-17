@@ -24,13 +24,17 @@ async function readAll<T>(page: (from: number, to: number) => PromiseLike<{ data
 
 export type ExportAccess = "ok" | "logged_out" | "not_allowed";
 
-/** Only the owner or a manager may download the whole book. */
-export async function checkExportAccess(): Promise<ExportAccess> {
+/**
+ * Only the owner or a manager may download the whole book (`book`); any active member may
+ * download one shop's statement (`statement`), which they can already see on screen.
+ */
+export async function checkExportAccess(scope: "book" | "statement" = "book"): Promise<ExportAccess> {
   const userId = await getUserId();
   if (!userId) return "logged_out";
   const supabase = await createClient();
   const { data } = await supabase.from("profiles").select("role, active").eq("user_id", userId).maybeSingle();
-  if (!data?.active || (data.role !== "owner" && data.role !== "manager")) return "not_allowed";
+  if (!data?.active) return "not_allowed";
+  if (scope === "book" && data.role !== "owner" && data.role !== "manager") return "not_allowed";
   return "ok";
 }
 
@@ -171,4 +175,37 @@ export async function buildExport(kind: ExportKind): Promise<string> {
     case "items":
       return itemsCsv(supabase);
   }
+}
+
+/**
+ * One shop's full statement (every debt and repayment with the running balance), oldest first.
+ * Null when the customer is not in the caller's business (RLS hides it).
+ */
+export async function buildStatementExport(customerId: string): Promise<string | null> {
+  const supabase = await createClient();
+  const { data: customer, error } = await supabase
+    .from("customers")
+    .select("id, name, phone")
+    .eq("id", customerId)
+    .maybeSingle();
+  if (error) throw new Error("export_load_failed");
+  if (!customer) return null;
+
+  const rows = await readAll((from, to) =>
+    supabase
+      .from("wh_customer_statement")
+      .select("id, type, amount, balance_after, created_at, due_date, note")
+      .eq("customer_id", customerId)
+      .order("created_at")
+      .order("id")
+      .range(from, to),
+  );
+  return toCsv(
+    [...DATE_HEADER, "customer", "phone", "type", "amount", "balance_after", "pay_back_by", "note"],
+    rows.flatMap((r) =>
+      r.created_at
+        ? [[...dateCells(r.created_at), customer.name, customer.phone, r.type, r.amount, r.balance_after, r.due_date, r.note]]
+        : [],
+    ),
+  );
 }

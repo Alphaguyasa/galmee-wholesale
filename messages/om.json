@@ -113,7 +113,8 @@
     "repayment": "Kaffalame",
     "balanceAfter": "Haftee {amount}",
     "errorAmount": "Hanga 0 ol lakkoofsaan galchaa, karaa kaffaltii filadhaa.",
-    "errorTooMuch": "Hangi kun liqaa maamilaa caala. Mirkaneessaa."
+    "errorTooMuch": "Hangi kun liqaa maamilaa caala. Mirkaneessaa.",
+    "downloadStatement": "Ibsa guutuu buusi"
   },
   "Overdue": {
     "title": "Liqaa akka turtii isaatti",

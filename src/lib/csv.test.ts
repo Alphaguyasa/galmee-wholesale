@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { addisDay, addisTime, exportFileName, isExportKind, toCsv } from "./csv";
+import { addisDay, addisTime, exportFileName, isExportKind, statementFileName, toCsv } from "./csv";
 
 describe("toCsv", () => {
   it("starts with a BOM and ends every line with CRLF", () => {
@@ -48,5 +48,13 @@ describe("export kinds", () => {
   });
   it("builds an ASCII file name", () => {
     expect(exportFileName("ledger", "2026-11-17")).toBe("galmee-wholesale-ledger-2026-11-17.csv");
+  });
+});
+
+describe("statementFileName", () => {
+  it("uses the first 8 hex digits of the customer id", () => {
+    expect(statementFileName("3F2A9C01-1111-4222-8333-444455556666", "2026-11-17")).toBe(
+      "galmee-wholesale-statement-3f2a9c01-2026-11-17.csv",
+    );
   });
 });

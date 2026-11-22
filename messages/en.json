@@ -77,7 +77,7 @@
     "skipToContent": "Skip to content",
     "loadError": "This page could not load. Check your connection and try again.",
     "retry": "Try again",
-    "offline": "You are offline. Figures shown may be out of date; new entries need a connection."
+    "offline": "You are offline. Figures shown may be out of date; repayments and credit sales are saved on this phone and sent when the internet is back."
   },
   "Customers": {
     "totalOwed": "Total owed to you",
@@ -222,7 +222,8 @@
     "errorPaidTooMuch": "The amount paid is more than the total.",
     "errorItem": "One of the items is no longer available. Reload the page.",
     "errorSave": "The sale was not saved. Try again.",
-    "give": "Give on credit"
+    "give": "Give on credit",
+    "saleQueued": "No network: the sale is saved on this phone and will be sent when the internet is back ({amount} on credit). Its receipt opens from the statement after it is sent."
   },
   "Receipt": {
     "saleTitle": "Credit sale receipt #{ref}",

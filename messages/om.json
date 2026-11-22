@@ -77,7 +77,7 @@
     "skipToContent": "Gara qabiyyeetti darbi",
     "loadError": "Fuulli hin banamne. Interneetii keessan mirkaneessitanii irra deebiʼaa.",
     "retry": "Irra deebiʼi",
-    "offline": "Interneetii hin qabdu. Lakkoofsonni mul'atan moofaa ta'uu danda'u; galmeen haaraan interneetii barbaada."
+    "offline": "Interneetii hin qabdu. Lakkoofsonni mul'atan moofaa ta'uu danda'u; kaffaltiin fi gurgurtaan liqii bilbila kana irratti olkaa'amanii interneetiin yommuu deebi'u ni ergamu."
   },
   "Customers": {
     "totalOwed": "Liqaa walii galaa",
@@ -222,7 +222,8 @@
     "errorPaidTooMuch": "Hanga kaffalame waliigala caala.",
     "errorItem": "Meeshaan tokko amma hin jiru. Fuula irra deebi'ii fe'i.",
     "errorSave": "Gurgurtaan hin olkaa'amne. Irra deebi'ii yaali.",
-    "give": "Liqiidhaan kenni"
+    "give": "Liqiidhaan kenni",
+    "saleQueued": "Neetworkiin hin jiru: gurgurtaan bilbila kana irratti olkaa'ameera; interneetiin yommuu deebi'u ni ergama ({amount} liqiin). Erga ergamee booda nagahee isaa ibsa herregaa irraa banuu dandeessa."
   },
   "Receipt": {
     "saleTitle": "Nagahee gurgurtaa liqii #{ref}",

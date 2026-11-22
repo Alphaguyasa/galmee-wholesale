@@ -2,14 +2,16 @@
 
 import { useActionState, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { Plus, Trash2, TriangleAlert } from "lucide-react";
-import { giveOnCredit } from "@/actions/sales";
+import { CloudOff, Plus, Trash2, TriangleAlert } from "lucide-react";
+import { giveOnCredit, type SaleFormState } from "@/actions/sales";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Link } from "@/i18n/navigation";
 import type { AppLocale } from "@/i18n/routing";
 import { formatEthiopianDate } from "@/lib/ethiopian-calendar";
 import { formatBirr, formatQty } from "@/lib/money";
+import { getOffline } from "@/lib/offline";
 
 export type SaleItemOption = { id: string; name: string; unit: string; price: number; onHand: number };
 
@@ -42,19 +44,75 @@ export function CreditSaleForm({
   const t = useTranslations("Sales");
   const tc = useTranslations("Customers");
   const locale = useLocale() as AppLocale;
-  const [state, formAction, pending] = useActionState(giveOnCredit, undefined);
   const [lines, setLines] = useState<Line[]>([{ key: 0, item: "", qty: "" }]);
   const [paid, setPaid] = useState("");
   const [due, setDue] = useState("");
+  const [queued, setQueued] = useState<number | null>(null);
 
   const byId = new Map(items.map((i) => [i.id, i]));
+
   const filled = lines.filter((l) => l.item && toNumber(l.qty) > 0);
   // Display only: the database recomputes the total from its own prices.
   const total = filled.reduce((sum, l) => sum + toNumber(l.qty) * (byId.get(l.item)?.price ?? 0), 0);
   const onCredit = Math.max(0, total - toNumber(paid));
 
+  /**
+   * No network (or older entries still waiting): the sale waits on this phone with the
+   * same client_ref, so if the server did get an earlier try it is recorded only once.
+   * Prices are the list prices this screen was given; the database checks them again.
+   */
+  async function queueSale(formData: FormData): Promise<SaleFormState> {
+    const chosen = filled.map((l) => ({ item_id: l.item, qty: toNumber(l.qty), price: byId.get(l.item)?.price ?? 0 }));
+    const paidNow = toNumber(paid);
+    if (chosen.length === 0) return { error: "errorLines" };
+    if (paidNow > total) return { error: "errorPaidTooMuch" };
+    const method = String(formData.get("method") ?? "cash");
+    const result = await getOffline().engine.callOrQueue("wh_record_credit_sale", {
+      p_lines: chosen,
+      p_customer: customerId,
+      p_paid: paidNow,
+      p_method: METHODS.some((m) => m.value === method) ? method : "cash",
+      p_client_ref: clientRef,
+      p_due: /^\d{4}-\d{2}-\d{2}$/.test(due) ? due : null,
+      p_override: false,
+      p_reason: null,
+    });
+    if (result.status === "queued") {
+      setQueued(onCredit);
+      return undefined;
+    }
+    // Back online after all: the normal path gives the receipt and the limit override.
+    return giveOnCredit(undefined, formData);
+  }
+
+  const [state, formAction, pending] = useActionState(async (prev: SaleFormState, formData: FormData) => {
+    const { engine } = getOffline();
+    if (!navigator.onLine || engine.getState().pending > 0) return queueSale(formData);
+    try {
+      return await giveOnCredit(prev, formData);
+    } catch (e) {
+      // A dropped connection fails the request itself; anything else (the redirect to the receipt included) goes on.
+      if (e instanceof TypeError || !navigator.onLine) return queueSale(formData);
+      throw e;
+    }
+  }, undefined);
+
   function update(key: number, patch: Partial<Line>) {
     setLines((prev) => prev.map((l) => (l.key === key ? { ...l, ...patch } : l)));
+  }
+
+  if (queued !== null) {
+    return (
+      <div className="grid gap-4">
+        <p role="status" className="flex items-start gap-2 rounded-md border border-warn p-3">
+          <CloudOff className="mt-0.5 size-5 shrink-0 text-warn" aria-hidden />
+          {t("saleQueued", { amount: formatBirr(queued, locale) })}
+        </p>
+        <Button asChild size="lg" variant="outline">
+          <Link href={`/customers/${customerId}`}>{tc("back")}</Link>
+        </Button>
+      </div>
+    );
   }
 
   return (

@@ -1,12 +1,14 @@
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { ArrowDownLeft, ArrowUpRight, Check, Download, Phone, Printer, TriangleAlert } from "lucide-react";
+import { ArrowDownLeft, ArrowUpRight, CalendarCheck, CalendarClock, CalendarX, Check, Download, Handshake, Phone, Printer, TriangleAlert } from "lucide-react";
+import { StatusBadge } from "@/components/galmee/status-badge";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import type { AppLocale } from "@/i18n/routing";
 import { formatEthiopianDate } from "@/lib/ethiopian-calendar";
 import { formatBirr } from "@/lib/money";
 import { getCustomer, getStatement } from "@/server/dal/customers";
+import { getCustomerPromises, type PromiseDTO } from "@/server/dal/promises";
 import { uuidParam } from "@/server/validation";
 
 export default async function CustomerPage({ params }: PageProps<"/[locale]/customers/[id]">) {
@@ -15,12 +17,14 @@ export default async function CustomerPage({ params }: PageProps<"/[locale]/cust
   const locale = rawLocale as AppLocale;
   if (!uuidParam.safeParse(id).success) notFound();
 
-  const [t, ts, tr, customer, statement] = await Promise.all([
+  const [t, ts, tr, tp, customer, statement, promises] = await Promise.all([
     getTranslations("Customers"),
     getTranslations("Sales"),
     getTranslations("Receipt"),
+    getTranslations("Promises"),
     getCustomer(id),
     getStatement(id),
+    getCustomerPromises(id),
   ]);
   if (!customer) notFound();
 
@@ -81,7 +85,40 @@ export default async function CustomerPage({ params }: PageProps<"/[locale]/cust
             <Link href={`/customers/${customer.id}/repay`}>{t("recordRepayment")}</Link>
           </Button>
         ) : null}
+        {owes ? (
+          <Button asChild size="lg" variant="outline" className="w-full md:w-auto">
+            <Link href={`/customers/${customer.id}/promise`}>
+              <Handshake aria-hidden />
+              {tp("button")}
+            </Link>
+          </Button>
+        ) : null}
       </div>
+
+      {promises.length > 0 ? (
+        <section className="mt-6">
+          <h2 className="px-4 text-lg font-bold md:px-0">{tp("heading")}</h2>
+          <ul className="mt-2 divide-y divide-border border-y">
+            {promises.map((p) => (
+              <li key={p.id} className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-3 gap-y-1 px-4 py-3 md:px-2">
+                <time dateTime={p.promisedOn} className="font-bold">
+                  {formatEthiopianDate(p.promisedOn, locale)}
+                </time>
+                <PromiseBadge promise={p} label={tp(`state_${p.state}`, { days: p.daysLate })} />
+                <span className="money text-sm text-muted-foreground">
+                  {p.amount !== null
+                    ? tp("promisedAmount", { amount: formatBirr(p.amount, locale) })
+                    : tp("promisedAll", { amount: formatBirr(p.owedAtPromise, locale) })}
+                </span>
+                <span className="money text-sm whitespace-nowrap text-muted-foreground">
+                  {tp("paidSince", { amount: formatBirr(p.paidSince, locale) })}
+                </span>
+                {p.note ? <span className="col-span-2 text-sm text-muted-foreground break-words">{p.note}</span> : null}
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
 
       <section className="mt-6">
         <div className="flex flex-wrap items-center justify-between gap-x-4 px-4 md:px-0">
@@ -131,4 +168,19 @@ export default async function CustomerPage({ params }: PageProps<"/[locale]/cust
       </section>
     </div>
   );
+}
+
+function PromiseBadge({ promise, label }: { promise: PromiseDTO; label: string }) {
+  switch (promise.state) {
+    case "kept":
+      return <StatusBadge tone="ok" icon={CalendarCheck}>{label}</StatusBadge>;
+    case "broken":
+      return <StatusBadge tone="urgent" icon={CalendarX}>{label}</StatusBadge>;
+    case "due_today":
+      return <StatusBadge tone="warn" icon={CalendarClock}>{label}</StatusBadge>;
+    case "replaced":
+      return <StatusBadge tone="neutral" icon={CalendarClock}>{label}</StatusBadge>;
+    default:
+      return <StatusBadge tone="sync" icon={CalendarClock}>{label}</StatusBadge>;
+  }
 }

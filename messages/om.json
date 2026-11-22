@@ -289,5 +289,31 @@
         "sub": "Gatii, gatii bittaa fi baay'ina jiru"
       }
     }
+  },
+  "Promises": {
+    "button": "Waadaa kaffaltii",
+    "title": "{name} kaffaluuf waadaa gale",
+    "heading": "Waadaa kaffaltii",
+    "when": "Yoom kaffalu?",
+    "in1": "Boru",
+    "in3": "Guyyaa 3 keessatti",
+    "in7": "Torbee tokko keessatti",
+    "otherDay": "Ykn guyyaa filadhu",
+    "amount": "Hanga waadaa galan (qarshii)",
+    "amountHint": "Waan irra jiru hunda kaffaluuf yoo waadaa galan duwwaa dhiisi.",
+    "note": "Yaadannoo (filannoo)",
+    "save": "Waadaa galmeessi",
+    "promisedAmount": "Waadaa: {amount}",
+    "promisedAll": "Hunda waadaa: {amount}",
+    "paidSince": "Erga sanaa kaffale: {amount}",
+    "state_waiting": "Eegaa jira",
+    "state_due_today": "Har'a",
+    "state_kept": "Waadaa eege",
+    "state_broken": "Cabe, guyyaa {days} turee",
+    "state_replaced": "Bakka bu'e",
+    "errorPromiseDate": "Har'aa hanga guyyaa 90tti guyyaa filadhu.",
+    "errorPromiseAmount": "Hanga zeeroo ol fi kan irra jiru hin caalle galchi.",
+    "errorNothingOwed": "Suuqiin kun idaa hin qabu; waadaan barbaachisu hin jiru.",
+    "errorSave": "Galmeessuun hin danda'amne. Walqunnamtii mirkaneessiitii irra deebi'ii yaali."
   }
 }

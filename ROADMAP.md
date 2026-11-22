@@ -17,6 +17,8 @@
 - [ ] Evening owner Telegram summary
 - [ ] Staff invite + per-staff collections view
 - [ ] Excel import customers + opening balances (export everything: done)
+- [x] Promise to pay: log a promised day (and amount) on a shop's debt; kept / broken worked out from real repayments
+- [ ] Broken and due-today promises as their own list on the Overdue screen
 
 ## M0: Foundation (shared pattern for all Galmee products)
 

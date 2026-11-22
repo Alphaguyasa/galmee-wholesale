@@ -53,6 +53,21 @@ export const repaymentSchema = z.object({
     .transform((v) => v || undefined),
 });
 
+export const promiseSchema = z.object({
+  customer: uuidParam,
+  promisedOn: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+  amount: z
+    .string()
+    .trim()
+    .transform((v) => (v === "" ? null : Number(v.replace(/,/g, ""))))
+    .pipe(z.number().positive().max(100_000_000).nullable()),
+  note: z
+    .string()
+    .trim()
+    .max(200)
+    .transform((v) => v || null),
+});
+
 export function formToObject(formData: FormData, keys: readonly string[]) {
   return Object.fromEntries(keys.map((k) => [k, formData.get(k) ?? ""]));
 }

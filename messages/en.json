@@ -289,5 +289,31 @@
         "sub": "Prices, cost and quantity on hand"
       }
     }
+  },
+  "Promises": {
+    "button": "Promise to pay",
+    "title": "{name} promises to pay",
+    "heading": "Promises to pay",
+    "when": "When will they pay?",
+    "in1": "Tomorrow",
+    "in3": "In 3 days",
+    "in7": "In a week",
+    "otherDay": "Or pick a day",
+    "amount": "Amount promised (birr)",
+    "amountHint": "Leave empty if they promise to pay everything they owe.",
+    "note": "Note (optional)",
+    "save": "Save promise",
+    "promisedAmount": "Promised {amount}",
+    "promisedAll": "Promised all: {amount}",
+    "paidSince": "Paid since: {amount}",
+    "state_waiting": "Waiting",
+    "state_due_today": "Due today",
+    "state_kept": "Kept",
+    "state_broken": "Broken, {days, plural, =1 {1 day late} other {# days late}}",
+    "state_replaced": "Replaced",
+    "errorPromiseDate": "Pick a day from today up to 90 days ahead.",
+    "errorPromiseAmount": "Enter an amount above zero and not more than they owe.",
+    "errorNothingOwed": "This shop owes nothing, so there is nothing to promise.",
+    "errorSave": "Could not save. Check your connection and try again."
   }
 }

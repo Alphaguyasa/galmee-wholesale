@@ -289,5 +289,31 @@
         "sub": "ዋጋ፣ የግዢ ዋጋ እና ያለው ብዛት"
       }
     }
+  },
+  "Promises": {
+    "button": "ለመክፈል ቃል",
+    "title": "{name} ለመክፈል ቃል ገቡ",
+    "heading": "የመክፈል ቃሎች",
+    "when": "መቼ ይከፍላሉ?",
+    "in1": "ነገ",
+    "in3": "በ3 ቀን",
+    "in7": "በሳምንት",
+    "otherDay": "ወይም ቀን ይምረጡ",
+    "amount": "ቃል የገቡት መጠን (ብር)",
+    "amountHint": "ያለባቸውን በሙሉ ለመክፈል ቃል ከገቡ ባዶ ይተዉት።",
+    "note": "ማስታወሻ (አማራጭ)",
+    "save": "ቃሉን አስቀምጥ",
+    "promisedAmount": "ቃል፦ {amount}",
+    "promisedAll": "ሁሉንም ቃል፦ {amount}",
+    "paidSince": "ከዚያ ወዲህ የከፈሉት፦ {amount}",
+    "state_waiting": "በመጠበቅ ላይ",
+    "state_due_today": "ዛሬ ነው",
+    "state_kept": "ቃላቸውን ጠብቀዋል",
+    "state_broken": "አልተከፈለም፣ {days} ቀን ዘግይቷል",
+    "state_replaced": "ተተክቷል",
+    "errorPromiseDate": "ከዛሬ እስከ 90 ቀን ያለ ቀን ይምረጡ።",
+    "errorPromiseAmount": "ከዜሮ በላይ እና ካለባቸው ያልበለጠ መጠን ያስገቡ።",
+    "errorNothingOwed": "ይህ ሱቅ ዕዳ የለበትም፤ ቃል የሚገባበት ነገር የለም።",
+    "errorSave": "ማስቀመጥ አልተቻለም። ግንኙነትዎን አረጋግጠው እንደገና ይሞክሩ።"
   }
 }

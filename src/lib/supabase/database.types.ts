@@ -2002,6 +2002,67 @@ export type Database = {
         }
         Relationships: []
       }
+      wh_payment_promises: {
+        Row: {
+          amount: number | null
+          created_at: string
+          created_by: string | null
+          customer_id: string
+          id: string
+          note: string | null
+          owed_at_promise: number
+          promised_on: string
+          status: string
+          tenant_id: string
+        }
+        Insert: {
+          amount?: number | null
+          created_at?: string
+          created_by?: string | null
+          customer_id: string
+          id?: string
+          note?: string | null
+          owed_at_promise: number
+          promised_on: string
+          status?: string
+          tenant_id?: string
+        }
+        Update: {
+          amount?: number | null
+          created_at?: string
+          created_by?: string | null
+          customer_id?: string
+          id?: string
+          note?: string | null
+          owed_at_promise?: number
+          promised_on?: string
+          status?: string
+          tenant_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "wh_payment_promises_customer_id_fkey"
+            columns: ["customer_id"]
+            isOneToOne: false
+            referencedRelation: "customer_balances"
+            referencedColumns: ["customer_id"]
+          },
+          {
+            foreignKeyName: "wh_payment_promises_customer_id_fkey"
+            columns: ["customer_id"]
+            isOneToOne: false
+            referencedRelation: "customers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "wh_payment_promises_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       customer_balances: {
@@ -2313,6 +2374,48 @@ export type Database = {
           },
         ]
       }
+      wh_promise_status: {
+        Row: {
+          amount: number | null
+          created_at: string | null
+          customer_id: string | null
+          days_late: number | null
+          id: string | null
+          name: string | null
+          note: string | null
+          owed_at_promise: number | null
+          owed_now: number | null
+          paid_since: number | null
+          phone: string | null
+          promised_on: string | null
+          state: string | null
+          status: string | null
+          tenant_id: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "wh_payment_promises_customer_id_fkey"
+            columns: ["customer_id"]
+            isOneToOne: false
+            referencedRelation: "customer_balances"
+            referencedColumns: ["customer_id"]
+          },
+          {
+            foreignKeyName: "wh_payment_promises_customer_id_fkey"
+            columns: ["customer_id"]
+            isOneToOne: false
+            referencedRelation: "customers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "wh_payment_promises_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Functions: {
       adjust_stock: {
@@ -2601,6 +2704,15 @@ export type Database = {
           days_31_60: number
           days_over_60: number
         }[]
+      }
+      wh_log_promise: {
+        Args: {
+          p_amount?: number
+          p_customer: string
+          p_note?: string
+          p_promised_on: string
+        }
+        Returns: string
       }
       wh_owed_summary: {
         Args: never

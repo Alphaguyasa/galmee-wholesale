@@ -98,3 +98,18 @@ export async function logPromise(input: {
   if (message.includes("nothing_owed")) return { ok: false, error: "errorNothingOwed" };
   return { ok: false, error: "errorSave" };
 }
+
+/** Open promises that need a call today: broken ones (latest date first) then the ones due today. */
+export async function getPromisesToChase(limit = 50): Promise<PromiseDTO[]> {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("wh_promise_status")
+    .select(COLUMNS)
+    .eq("status", "open")
+    .in("state", ["broken", "due_today"])
+    .order("promised_on", { ascending: true })
+    .limit(limit);
+  if (error) throw new Error("promises_load_failed");
+  const rows = toDTO(data);
+  return [...rows.filter((r) => r.state === "broken"), ...rows.filter((r) => r.state === "due_today")];
+}

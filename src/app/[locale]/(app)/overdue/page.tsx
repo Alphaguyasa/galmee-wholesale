@@ -1,16 +1,25 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { Clock } from "lucide-react";
+import { CalendarClock, CalendarX, Clock, Phone } from "lucide-react";
+import { StatusBadge } from "@/components/galmee/status-badge";
 import { Link } from "@/i18n/navigation";
 import type { AppLocale } from "@/i18n/routing";
+import { formatEthiopianDate } from "@/lib/ethiopian-calendar";
 import { formatBirr } from "@/lib/money";
 import { getAgeingTotals, listAgeing } from "@/server/dal/customers";
+import { getPromisesToChase } from "@/server/dal/promises";
 
 export default async function OverduePage({ params }: PageProps<"/[locale]/overdue">) {
   const { locale: rawLocale } = await params;
   setRequestLocale(rawLocale);
   const locale = rawLocale as AppLocale;
 
-  const [t, rows, totals] = await Promise.all([getTranslations("Overdue"), listAgeing(), getAgeingTotals()]);
+  const [t, tp, rows, totals, chase] = await Promise.all([
+    getTranslations("Overdue"),
+    getTranslations("Promises"),
+    listAgeing(),
+    getAgeingTotals(),
+    getPromisesToChase(),
+  ]);
 
   const buckets = [
     { key: "d0", label: t("bucket0"), total: totals.days0To30 },
@@ -23,6 +32,51 @@ export default async function OverduePage({ params }: PageProps<"/[locale]/overd
       <div className="px-4 pt-4 md:px-0 md:pt-0">
         <h1 className="text-[1.375rem] font-bold">{t("title")}</h1>
       </div>
+
+      {chase.length > 0 ? (
+        <section aria-labelledby="chase-heading" className="mt-3">
+          <h2 id="chase-heading" className="px-4 text-lg font-bold md:px-0">
+            {tp("chaseHeading", { count: chase.length })}
+          </h2>
+          <ul className="mt-2 divide-y divide-border border-y">
+            {chase.map((p) => (
+              <li key={p.id} className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-3 gap-y-1 px-4 py-3 md:px-2">
+                <Link href={`/customers/${p.customerId}`} className="truncate font-bold text-tarp underline underline-offset-4">
+                  {p.name}
+                </Link>
+                {p.state === "broken" ? (
+                  <StatusBadge tone="urgent" icon={CalendarX}>
+                    {tp("state_broken", { days: p.daysLate })}
+                  </StatusBadge>
+                ) : (
+                  <StatusBadge tone="warn" icon={CalendarClock}>
+                    {tp("state_due_today")}
+                  </StatusBadge>
+                )}
+                <span className="text-sm text-muted-foreground">
+                  <time dateTime={p.promisedOn}>{formatEthiopianDate(p.promisedOn, locale)}</time>
+                  {" · "}
+                  <span className="money">
+                    {p.amount !== null
+                      ? tp("promisedAmount", { amount: formatBirr(p.amount, locale) })
+                      : tp("promisedAll", { amount: formatBirr(p.owedAtPromise, locale) })}
+                  </span>
+                </span>
+                <span className="money text-sm whitespace-nowrap text-owed">{formatBirr(p.owedNow, locale)}</span>
+                {p.phone ? (
+                  <a
+                    href={`tel:${p.phone}`}
+                    className="col-span-2 inline-flex min-h-12 items-center gap-2 justify-self-start text-sm text-tarp underline underline-offset-4"
+                  >
+                    <Phone className="size-4" aria-hidden />
+                    <span dir="ltr">{p.phone}</span>
+                  </a>
+                ) : null}
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
 
       <dl className="mt-3 grid grid-cols-3 divide-x divide-border border-y">
         {buckets.map((b) => (

@@ -314,6 +314,7 @@
     "errorPromiseDate": "Pick a day from today up to 90 days ahead.",
     "errorPromiseAmount": "Enter an amount above zero and not more than they owe.",
     "errorNothingOwed": "This shop owes nothing, so there is nothing to promise.",
-    "errorSave": "Could not save. Check your connection and try again."
+    "errorSave": "Could not save. Check your connection and try again.",
+    "chaseHeading": "{count, plural, =1 {1 promise to chase today} other {# promises to chase today}}"
   }
 }

@@ -314,6 +314,7 @@
     "errorPromiseDate": "Har'aa hanga guyyaa 90tti guyyaa filadhu.",
     "errorPromiseAmount": "Hanga zeeroo ol fi kan irra jiru hin caalle galchi.",
     "errorNothingOwed": "Suuqiin kun idaa hin qabu; waadaan barbaachisu hin jiru.",
-    "errorSave": "Galmeessuun hin danda'amne. Walqunnamtii mirkaneessiitii irra deebi'ii yaali."
+    "errorSave": "Galmeessuun hin danda'amne. Walqunnamtii mirkaneessiitii irra deebi'ii yaali.",
+    "chaseHeading": "Waadaa har'a hordofamu: {count}"
   }
 }

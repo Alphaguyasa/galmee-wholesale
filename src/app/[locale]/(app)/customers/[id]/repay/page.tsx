@@ -25,7 +25,7 @@ export default async function RepayPage({ params }: PageProps<"/[locale]/custome
         <h1 className="text-[1.375rem] font-bold break-words">{t("repayTitle", { name: customer.name })}</h1>
         <p className="money text-owed">{t("owesNow", { amount: formatBirr(customer.balance, locale) })}</p>
       </div>
-      <RepaymentForm customerId={customer.id} />
+      <RepaymentForm customerId={customer.id} balance={customer.balance} />
     </section>
   );
 }

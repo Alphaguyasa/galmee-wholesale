@@ -23,7 +23,15 @@
   },
   "Offline": {
     "title": "You are offline",
-    "body": "Galmee will reconnect automatically. Sales you record are saved on this phone and sync when the internet is back."
+    "body": "Galmee will reconnect automatically. Sales you record are saved on this phone and sync when the internet is back.",
+    "queuedRepayment": "Repayment · {amount}",
+    "queuedSale": "Credit sale · {count, plural, =1 {1 item} other {# items}}",
+    "error_customer_not_found": "This customer is no longer in your book.",
+    "error_bad_amount": "The amount was not accepted.",
+    "error_credit_limit_exceeded": "Above the customer's credit limit.",
+    "error_insufficient_stock": "Not enough stock left.",
+    "error_item_not_found": "An item no longer exists.",
+    "error_other": "The server refused this. Check it and enter it again."
   },
   "Auth": {
     "loginTitle": "Log in to your shop",
@@ -114,7 +122,8 @@
     "balanceAfter": "Balance {amount}",
     "errorAmount": "Enter the amount as a number above 0, and choose how it was paid.",
     "errorTooMuch": "That is more than this customer owes. Check the amount.",
-    "downloadStatement": "Download full statement"
+    "downloadStatement": "Download full statement",
+    "repaymentQueued": "No network: the repayment of {amount} is saved on this phone and will be sent when the internet is back."
   },
   "Overdue": {
     "title": "Overdue by age",

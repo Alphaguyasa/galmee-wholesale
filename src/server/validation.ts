@@ -42,17 +42,6 @@ export const customerSchema = z.object({
 
 export const PAY_METHODS = ["cash", "telebirr", "cbe_birr", "bank", "other"] as const;
 
-export const repaymentSchema = z.object({
-  customer: uuidParam,
-  amount: z.coerce.number().positive().max(100_000_000),
-  method: z.enum(PAY_METHODS),
-  reference: z
-    .string()
-    .trim()
-    .max(80)
-    .transform((v) => v || undefined),
-});
-
 export const promiseSchema = z.object({
   customer: uuidParam,
   promisedOn: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),

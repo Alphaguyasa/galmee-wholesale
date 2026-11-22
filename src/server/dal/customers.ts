@@ -181,23 +181,6 @@ export async function getStatement(customerId: string): Promise<StatementRowDTO[
   );
 }
 
-/** Records a repayment through the core RPC, which writes the payment and the ledger entry together. */
-export async function recordRepayment(input: {
-  customer: string;
-  amount: number;
-  method: "cash" | "telebirr" | "cbe_birr" | "bank" | "other";
-  reference: string | undefined;
-}): Promise<{ ok: true; paymentId: string } | { ok: false }> {
-  const supabase = await createClient();
-  const { data, error } = await supabase.rpc("record_repayment", {
-    p_customer: input.customer,
-    p_amount: input.amount,
-    p_method: input.method,
-    p_reference: input.reference,
-  });
-  return !error && data ? { ok: true, paymentId: data } : { ok: false };
-}
-
 export type PaymentReceiptDTO = {
   id: string;
   ref: string;

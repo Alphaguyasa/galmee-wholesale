@@ -23,7 +23,15 @@
   },
   "Offline": {
     "title": "ከኢንተርኔት ተቋርጠዋል",
-    "body": "ገልሜ በራሱ እንደገና ይገናኛል። የሚመዘግቧቸው ሽያጮች በዚህ ስልክ ተቀምጠው ኢንተርኔት ሲመለስ ይመሳሰላሉ።"
+    "body": "ገልሜ በራሱ እንደገና ይገናኛል። የሚመዘግቧቸው ሽያጮች በዚህ ስልክ ተቀምጠው ኢንተርኔት ሲመለስ ይመሳሰላሉ።",
+    "queuedRepayment": "ክፍያ · {amount}",
+    "queuedSale": "የዱቤ ሽያጭ · {count} ዕቃ",
+    "error_customer_not_found": "ይህ ደንበኛ በመዝገብዎ ውስጥ የለም።",
+    "error_bad_amount": "መጠኑ ተቀባይነት አላገኘም።",
+    "error_credit_limit_exceeded": "ከደንበኛው የዱቤ ገደብ በላይ ነው።",
+    "error_insufficient_stock": "በቂ ዕቃ የለም።",
+    "error_item_not_found": "አንድ ዕቃ ከእንግዲህ የለም።",
+    "error_other": "ሰርቨሩ አልተቀበለውም። አረጋግጠው እንደገና ያስገቡ።"
   },
   "Auth": {
     "loginTitle": "ወደ ሱቅዎ ይግቡ",
@@ -114,7 +122,8 @@
     "balanceAfter": "ቀሪ {amount}",
     "errorAmount": "መጠኑን ከ0 በላይ በቁጥር ያስገቡ፣ የክፍያ መንገዱንም ይምረጡ።",
     "errorTooMuch": "መጠኑ ደንበኛው ካለበት ዕዳ ይበልጣል። አረጋግጠው ያስገቡ።",
-    "downloadStatement": "ሙሉ መግለጫውን ያውርዱ"
+    "downloadStatement": "ሙሉ መግለጫውን ያውርዱ",
+    "repaymentQueued": "ኔትወርክ የለም፦ የ{amount} ክፍያ በዚህ ስልክ ተቀምጧል፤ ኢንተርኔት ሲመለስ ይላካል።"
   },
   "Overdue": {
     "title": "ዕዳ በቆይታ",

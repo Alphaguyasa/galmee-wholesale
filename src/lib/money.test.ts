@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { formatBirr } from "./money";
+import { formatBirr, parseBirrAmount } from "./money";
 
 describe("formatBirr", () => {
   it("uses ብር in Amharic and ETB otherwise, with two decimals", () => {
@@ -22,5 +22,16 @@ describe("formatAmount", () => {
   it("shows two decimals and no currency", async () => {
     const { formatAmount } = await import("./money");
     expect(formatAmount(3800)).toBe("3,800.00");
+  });
+});
+
+describe("parseBirrAmount", () => {
+  it("reads plain and comma-grouped amounts", () => {
+    expect(parseBirrAmount("1500")).toBe(1500);
+    expect(parseBirrAmount(" 1,500.50 ")).toBe(1500.5);
+  });
+
+  it("refuses zero, negatives, words and more than 2 decimals", () => {
+    for (const bad of ["0", "-5", "abc", "", "1.005", "1e3"]) expect(parseBirrAmount(bad)).toBeNull();
   });
 });

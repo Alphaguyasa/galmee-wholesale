@@ -326,5 +326,11 @@
     "errorNothingOwed": "This shop owes nothing, so there is nothing to promise.",
     "errorSave": "Could not save. Check your connection and try again.",
     "chaseHeading": "{count, plural, =1 {1 promise to chase today} other {# promises to chase today}}"
+  },
+  "Reports": {
+    "title": "Reports",
+    "intro": "Sales, repayments and who owes, for today, this week, this Ethiopian month or any days you pick.",
+    "ageingNow": "Owed as of now; the period does not change it.",
+    "link": "Reports by week and month"
   }
 }

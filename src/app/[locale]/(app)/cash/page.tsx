@@ -1,5 +1,5 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { CalendarDays, ChevronLeft, ChevronRight, Download } from "lucide-react";
+import { BarChart3, CalendarDays, ChevronLeft, ChevronRight, Download } from "lucide-react";
 import { EmptyState } from "@/components/galmee/empty-state";
 import { ListRow, ListSheet } from "@/components/galmee/list-row";
 import { MoneySummaryCard } from "@/components/galmee/money-summary-card";
@@ -24,9 +24,10 @@ export default async function DailyCashPage({ params, searchParams }: PageProps<
 
   const today = addisToday();
   const day = typeof sp.day === "string" && isIsoDay(sp.day) && sp.day <= today ? sp.day : today;
-  const [t, te, report, session] = await Promise.all([
+  const [t, te, tr, report, session] = await Promise.all([
     getTranslations("Cash"),
     getTranslations("Export"),
+    getTranslations("Reports"),
     getDailyCash(day),
     getSession(),
   ]);
@@ -142,6 +143,11 @@ export default async function DailyCashPage({ params, searchParams }: PageProps<
           </ListSheet>
         </section>
       )}
+
+      <Link href="/reports" className="inline-flex min-h-12 items-center gap-2 justify-self-start text-tarp underline underline-offset-4">
+        <BarChart3 className="size-4" aria-hidden />
+        {tr("link")}
+      </Link>
 
       {canExport ? (
         <Link href="/export" className="inline-flex min-h-12 items-center gap-2 justify-self-start text-tarp underline underline-offset-4">

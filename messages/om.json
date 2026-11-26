@@ -326,5 +326,11 @@
     "errorNothingOwed": "Suuqiin kun idaa hin qabu; waadaan barbaachisu hin jiru.",
     "errorSave": "Galmeessuun hin danda'amne. Walqunnamtii mirkaneessiitii irra deebi'ii yaali.",
     "chaseHeading": "Waadaa har'a hordofamu: {count}"
+  },
+  "Reports": {
+    "title": "Gabaasa",
+    "intro": "Gurgurtaa, liqaa deebi'eefi eenyu liqaa akka qabu; har'aaf, torban kanaaf, ji'a kanaaf ykn guyyoota filatteef.",
+    "ageingNow": "Liqaa hanga ammaa; yeroon filatame hin jijjiiru.",
+    "link": "Gabaasa torbanii fi ji'aan"
   }
 }

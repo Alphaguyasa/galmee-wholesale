@@ -160,13 +160,28 @@
   }
 }
 
-/* 58 mm thermal receipt: ReceiptPreview prints alone, everything else hides. */
+/* Galmee receipt kit: when one receipt is marked for printing, only it prints, edge to edge. */
 @media print {
-  body:has(.receipt-58) > *:not(:has(.receipt-58)) {
+  @page {
+    margin: 0;
+  }
+  body:has([data-printing]) > *:not(:has([data-printing])),
+  body:has([data-printing]) .galmee-receipt:not([data-printing]) {
     display: none !important;
+  }
+  .galmee-receipt[data-printing] {
+    margin: 0;
+    border: 0;
+    padding: 2mm;
+    max-width: none;
   }
   .receipt-58 {
     width: 58mm;
+    color: #000;
+    background: #fff;
+  }
+  .receipt-80 {
+    width: 80mm;
     color: #000;
     background: #fff;
   }

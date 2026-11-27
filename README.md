@@ -8,7 +8,7 @@ Live: https://galmee-wholesale.vercel.app
 
 | Who owes | Shop statement | Credit-sale receipt |
 | --- | --- | --- |
-| ![Customers sorted by amount owed](docs/screenshots/customers-en-360.png) | ![One shop's balance and statement](docs/screenshots/detail-en-360.png) | ![58 mm receipt for a credit sale](docs/screenshots/receipt-en-360.png) |
+| ![Customers sorted by amount owed](docs/screenshots/customers-en-360.png) | ![One shop's balance and statement](docs/screenshots/detail-en-360.png) | ![Receipt for a credit sale, 58 or 80 mm](docs/screenshots/receipt-en-360.png) |
 
 Screens shown with sample data.
 

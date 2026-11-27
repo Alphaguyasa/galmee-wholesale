@@ -241,7 +241,11 @@
     "reference": "Reference: {ref}",
     "paymentSaved": "Repayment recorded. Print the receipt for the customer.",
     "settled": "Fully paid. Thank you",
-    "reprint": "Receipt"
+    "reprint": "Receipt",
+    "widthLabel": "Paper",
+    "width58": "58 mm",
+    "width80": "80 mm",
+    "repaidLine": "Paid back on credit"
   },
   "Cash": {
     "title": "Daily cash",

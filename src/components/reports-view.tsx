@@ -4,6 +4,7 @@ import { useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { ExportCsvButton } from "@/components/galmee/export-csv-button";
 import { ReportScreen } from "@/components/galmee/report-screen";
+import { SummaryPrintButton } from "@/components/galmee/summary-print-button";
 import { createReportFetcher, ROW_CAP } from "@/lib/galmee/report";
 import { ageingRow, repaymentRow, runnerClient, saleRow, SOURCES, WHOLESALE_REPORTS, type SourceRunner } from "@/lib/reports";
 import { createClient } from "@/lib/supabase/client";
@@ -15,7 +16,17 @@ const fail = (message: string) => ({ data: null, error: { message } });
  * period picker. Rows come straight from Supabase with the user's session (RLS keeps them
  * to this business); offline, the last loaded copy shows with a "saved copy" badge.
  */
-export function ReportsView({ lang, today, canExport }: { lang: string; today: string; canExport: boolean }) {
+export function ReportsView({
+  lang,
+  today,
+  canExport,
+  tenantName,
+}: {
+  lang: string;
+  today: string;
+  canExport: boolean;
+  tenantName: string;
+}) {
   const t = useTranslations("Reports");
   const tc = useTranslations("Cash");
   const fetcher = useMemo(() => {
@@ -69,6 +80,7 @@ export function ReportsView({ lang, today, canExport }: { lang: string; today: s
       actions={({ def, period, rows }) => (
         <>
           {def.key === "ageing" ? <span className="self-center text-sm text-muted-foreground">{t("ageingNow")}</span> : null}
+          {rows.length > 0 ? <SummaryPrintButton def={def} period={period} rows={rows} lang={lang} tenant={{ name: tenantName }} /> : null}
           {canExport ? <ExportCsvButton def={def} period={period} rows={rows} lang={lang} filenameBase="galmee-wholesale" /> : null}
         </>
       )}

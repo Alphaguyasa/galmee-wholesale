@@ -241,7 +241,11 @@
     "reference": "Wabii: {ref}",
     "paymentSaved": "Kaffaltiin galmaa'eera. Maamilaaf nagahee maxxansi.",
     "settled": "Liqiin guutummaan kaffalameera. Galatoomaa",
-    "reprint": "Nagahee"
+    "reprint": "Nagahee",
+    "widthLabel": "Waraqaa",
+    "width58": "58 mm",
+    "width80": "80 mm",
+    "repaidLine": "Liqii deebifame"
   },
   "Cash": {
     "title": "Maallaqa guyyaa",

@@ -1,47 +1,35 @@
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Check } from "lucide-react";
-import { ReceiptPreview } from "@/components/galmee/receipt-preview";
-import { PrintButton } from "@/components/print-button";
+import { PrintReceiptButton } from "@/components/galmee/print-receipt-button";
+import { Receipt } from "@/components/galmee/receipt";
+import { ReceiptWidthToggle, receiptWidthParam } from "@/components/receipt-width-toggle";
 import { Link } from "@/i18n/navigation";
 import type { AppLocale } from "@/i18n/routing";
 import { formatEthiopianDate } from "@/lib/ethiopian-calendar";
-import { formatAmount, formatBirr, formatQty } from "@/lib/money";
+import { creditSaleReceiptData } from "@/lib/wholesale-receipt";
 import { getSaleReceipt } from "@/server/dal/sales";
 import { getSession } from "@/server/dal/session";
 import { uuidParam } from "@/server/validation";
 
-const METHOD_KEYS: Record<string, "methodCash" | "methodTelebirr" | "methodCbe" | "methodBank" | "methodOther"> = {
-  cash: "methodCash",
-  telebirr: "methodTelebirr",
-  cbe_birr: "methodCbe",
-  bank: "methodBank",
-  other: "methodOther",
-};
+const RECEIPT_ID = "sale-receipt";
 
 export default async function SaleReceiptPage({ params, searchParams }: PageProps<"/[locale]/customers/[id]/sales/[saleId]">) {
   const [{ locale: rawLocale, id, saleId }, sp] = await Promise.all([params, searchParams]);
   setRequestLocale(rawLocale);
   const locale = rawLocale as AppLocale;
   if (!uuidParam.safeParse(id).success || !uuidParam.safeParse(saleId).success) notFound();
+  const width = receiptWidthParam(sp.w);
 
-  const [{ tenant }, t, tc, sale] = await Promise.all([
-    getSession(),
-    getTranslations("Receipt"),
-    getTranslations("Customers"),
-    getSaleReceipt(saleId, id, locale),
-  ]);
+  const [{ tenant }, t, sale] = await Promise.all([getSession(), getTranslations("Receipt"), getSaleReceipt(saleId, id, locale)]);
   if (!sale) notFound();
 
-  const onCredit = Math.max(0, sale.total - sale.paid);
-  const methodKey = sale.method ? METHOD_KEYS[sale.method] : undefined;
-  const method = methodKey ? tc(methodKey) : (sale.method ?? tc("methodOther"));
-  const totals = [
-    { label: t("total"), amount: formatBirr(sale.total, locale) },
-    ...(sale.paid > 0 ? [{ label: t("paid", { method }), amount: formatBirr(sale.paid, locale) }] : []),
-    ...(onCredit > 0 ? [{ label: t("onCredit"), amount: formatBirr(onCredit, locale) }] : []),
-    ...(sale.balanceAfter !== null ? [{ label: t("owedAfter"), amount: formatBirr(sale.balanceAfter, locale) }] : []),
-  ];
+  const data = creditSaleReceiptData(sale, {
+    tenant: { name: tenant.name },
+    lang: locale,
+    ethDate: formatEthiopianDate(sale.createdAt, locale),
+    footer: sale.dueDate ? t("payBackBy", { date: formatEthiopianDate(sale.dueDate, locale) }) : undefined,
+  });
 
   return (
     <div className="grid max-w-md gap-4 px-4 pt-4 md:px-0 md:pt-0 print:p-0">
@@ -58,23 +46,18 @@ export default async function SaleReceiptPage({ params, searchParams }: PageProp
         </p>
       ) : null}
       <h1 className="sr-only">{t("saleTitle", { ref: sale.ref })}</h1>
-      <ReceiptPreview
-        className="mx-0 print:border-0 print:p-0"
-        tenantName={tenant.name}
-        title={t("saleTitle", { ref: sale.ref })}
-        dateLabel={formatEthiopianDate(sale.createdAt, locale)}
-        lines={[
-          { name: t("customer", { name: sale.customerName }), qty: "", amount: "" },
-          ...sale.lines.map((l) => ({
-            name: `${l.name}, ${formatQty(l.qty)} ${l.unit} × ${formatAmount(l.price)}`,
-            qty: "",
-            amount: formatAmount(l.qty * l.price),
-          })),
-        ]}
-        totals={totals}
-        footer={sale.dueDate ? t("payBackBy", { date: formatEthiopianDate(sale.dueDate, locale) }) : t("footer")}
+      <ReceiptWidthToggle
+        href={`/customers/${sale.customerId}/sales/${sale.id}`}
+        width={width}
+        label={t("widthLabel")}
+        labels={{ 58: t("width58"), 80: t("width80") }}
       />
-      <PrintButton label={t("print")} />
+      <div className="overflow-x-auto print:overflow-visible">
+        <Receipt data={data} width={width} id={RECEIPT_ID} className="mx-0" />
+      </div>
+      <div className="print:hidden">
+        <PrintReceiptButton targetId={RECEIPT_ID} label={t("print")} />
+      </div>
     </div>
   );
 }

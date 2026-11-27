@@ -241,7 +241,11 @@
     "reference": "ማጣቀሻ፦ {ref}",
     "paymentSaved": "ክፍያው ተመዝግቧል። ለደንበኛው ደረሰኝ ያትሙ።",
     "settled": "ዕዳው ሙሉ በሙሉ ተከፍሏል። እናመሰግናለን",
-    "reprint": "ደረሰኝ"
+    "reprint": "ደረሰኝ",
+    "widthLabel": "ወረቀት",
+    "width58": "58 ሚሜ",
+    "width80": "80 ሚሜ",
+    "repaidLine": "የተመለሰ ዱቤ"
   },
   "Cash": {
     "title": "የዕለቱ ገንዘብ",

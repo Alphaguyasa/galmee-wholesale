@@ -16,7 +16,7 @@ export default async function ReportsPage({ params }: PageProps<"/[locale]/repor
         <h1 className="text-[1.5625rem] leading-tight font-bold">{t("title")}</h1>
         <p className="text-muted-foreground">{t("intro")}</p>
       </div>
-      <ReportsView lang={locale} today={addisDay()} canExport={canExport} />
+      <ReportsView lang={locale} today={addisDay()} canExport={canExport} tenantName={session.tenant.name} />
     </div>
   );
 }
